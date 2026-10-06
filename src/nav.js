@@ -58,3 +58,26 @@
   }, { threshold: 0.6 });
   clips.forEach(c => io.observe(c));
 })();
+
+// קרוסלה: הכפתורים גוללים כרטיס אחד, ומושבתים בקצוות. בעברית "הבא" הוא שמאלה.
+(() => {
+  for (const box of document.querySelectorAll('.carousel')) {
+    const track = box.querySelector('.carousel__track');
+    const [prev, next] = box.querySelectorAll('.carousel__btn');
+    const rtl = getComputedStyle(track).direction === 'rtl';
+    const step = () => (track.querySelector('li')?.getBoundingClientRect().width || track.clientWidth) + parseFloat(getComputedStyle(track).columnGap || 0);
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const pos = Math.abs(track.scrollLeft); // ב-RTL scrollLeft שלילי
+      prev.disabled = pos <= 2;
+      next.disabled = pos >= max - 2;
+      box.querySelector('.carousel__nav').hidden = max <= 2;
+    };
+    for (const btn of [prev, next]) {
+      btn.addEventListener('click', () => track.scrollBy({ left: Number(btn.dataset.dir) * step() * (rtl ? -1 : 1) }));
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+})();

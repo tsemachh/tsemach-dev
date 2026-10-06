@@ -181,9 +181,15 @@ function page(L) {
       <h2 id="games-h">${esc(L.gamesHeading)}</h2>
       <p>${esc(L.gamesIntro)}</p>
     </div>
-    <ul class="projects projects--games" role="list">
-      ${games.map((p, i) => project(p, L, i)).join('\n      ')}
-    </ul>
+    <div class="carousel">
+      <ul class="projects carousel__track" role="list" tabindex="0" aria-label="${esc(L.gamesHeading)}">
+        ${games.map((p, i) => project(p, L, i)).join('\n        ')}
+      </ul>
+      <div class="carousel__nav">
+        <button class="carousel__btn" type="button" data-dir="-1" aria-label="${esc(L.prev)}"><svg aria-hidden="true" viewBox="0 0 16 16" width="18" height="18"><path fill="currentColor" d="M10.5 2.5 5 8l5.5 5.5 1.4-1.4L7.8 8l4.1-4.1z"/></svg></button>
+        <button class="carousel__btn" type="button" data-dir="1" aria-label="${esc(L.next)}"><svg aria-hidden="true" viewBox="0 0 16 16" width="18" height="18"><path fill="currentColor" d="M5.5 2.5 11 8l-5.5 5.5-1.4-1.4L8.2 8 4.1 3.9z"/></svg></button>
+      </div>
+    </div>
   </section>
 
   <section class="notes" id="notes" aria-labelledby="notes-h">

@@ -264,7 +264,7 @@ h2 {
 .projects { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(2.5rem, 6vw, 4.5rem); }
 .project { position: relative; display: grid; gap: 1.25rem; align-items: start; }
 @media (min-width: 60rem) {
-  .projects:not(.projects--games) .project { grid-template-columns: 26rem 1fr; gap: 3rem; }
+  .projects:not(.projects--games):not(.carousel__track) .project { grid-template-columns: 26rem 1fr; gap: 3rem; }
 }
 
 /* כל צילום מסך יושב בתוך "מסך" כחול, כמו בצג של פעם */
@@ -351,6 +351,27 @@ h2 {
 .note > p:last-child { color: var(--muted); margin: 0; }
 .notes__more { margin-top: 2rem; }
 .notes__more a { display: inline-flex; min-height: 44px; align-items: center; font-weight: 500; }
+
+/* ───────── קרוסלת המשחקים: גלילה רגילה עם snap, וכפתורים למי שלא גולל לצדדים ───────── */
+.carousel { position: relative; }
+.carousel__track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: min(82%, 25rem); gap: clamp(1rem, 3vw, 2rem);
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 0;
+  padding-block: .25rem 1rem; margin: 0; scrollbar-width: thin; scrollbar-color: var(--screen) transparent;
+}
+.carousel__track > li { scroll-snap-align: start; }
+.carousel__track:focus-visible { outline: 3px solid var(--amber); outline-offset: 6px; }
+.carousel__track .project h3 { font-size: var(--step-1); }
+.carousel__nav { display: flex; gap: .5rem; justify-content: flex-end; margin-top: .75rem; }
+.carousel__btn {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 6px; cursor: pointer;
+  background: var(--screen); color: var(--phosphor); border: 1px solid color-mix(in srgb, var(--phosphor) 35%, transparent);
+}
+.carousel__btn:hover { color: #fff; }
+.carousel__btn:disabled { opacity: .35; cursor: default; }
+[dir=rtl] .carousel__btn svg { transform: scaleX(-1); }
+@media (prefers-reduced-motion: no-preference) { .carousel__track { scroll-behavior: smooth; } }
+abbr[title] { text-decoration: underline dotted; text-underline-offset: .2em; cursor: help; }
 
 .contact p { color: var(--muted); }
 .contact__mail { font-size: clamp(1.5rem, 1rem + 3vw, 2.667rem); font-weight: 600; margin-top: 1.5rem; direction: ltr; unicode-bidi: isolate; }
