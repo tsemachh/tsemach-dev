@@ -153,6 +153,7 @@ export const t = {
     skip: 'דילוג לתוכן',
     skipIntro: 'דילוג על הפתיח',
     name: 'צמח חדד',
+    nameParts: ['צמח', 'ח', 'דד'], // ח המשותפת: בפתיח השם מתמזג ל"צמחדד"
     ogTitle: 'צמח חדד',
     ogDescription: 'ארכיטקט ראשי בשפינג, מתמחה ב-Payload CMS, בארכיטקטורת Front End ובחוויית מפתחים. ארבעים שנה של קוד, מה-800XL ועד סוכני AI.',
     tagline: 'ארבעים שנה של קוד, מ-800XL ועד סוכני AI.',
@@ -185,6 +186,7 @@ export const t = {
     skip: 'Skip to content',
     skipIntro: 'Skip intro',
     name: 'Tsemach Hadad',
+    nameParts: ['Tsemach', 'H', 'adad'], // Tsemachadad
     ogTitle: 'Tsemach Hadad',
     ogDescription: 'Chief Architect at Shefing, specializing in Payload CMS, front-end architecture and developer experience. Forty years of code, from the 800XL to AI agents.',
     tagline: 'Forty years of code, from the 800XL to AI agents.',

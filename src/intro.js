@@ -29,7 +29,10 @@
     game?.stop();
     d.classList.add('run', 'reveal', 'sweep', 'done');
     try { sessionStorage.setItem(key, '1'); } catch {}
-    setTimeout(() => d.classList.remove('intro', 'calm', 'run', 'reveal', 'sweep', 'done'), 800);
+    setTimeout(() => {
+      d.classList.remove('intro', 'calm', 'run', 'reveal', 'sweep', 'done');
+      if (!calm) mergeName();
+    }, 800);
     removeEventListener('keydown', skip, true);
     removeEventListener('pointerdown', skip, true);
     removeEventListener('wheel', skip, true);
@@ -48,6 +51,21 @@
   addEventListener('wheel', skip, { capture: true, passive: true });
   addEventListener('touchmove', skip, { capture: true, passive: true });
   document.querySelector('.skip-intro')?.addEventListener('click', finish);
+
+  // צמח + חדד חולקים ח' — לרגע השם מתמזג ל"צמחדד" ואז חוזר. רק כשהשם בשורה אחת, ולא במצב הפחתת תנועה.
+  function mergeName() {
+    const name = document.querySelector('.name');
+    const smooth = name?.querySelector('.name__smooth');
+    const gap = smooth?.querySelector('.name__gap');
+    if (!gap) return;
+    const lh = parseFloat(getComputedStyle(name).fontSize);
+    if (smooth.getBoundingClientRect().height > lh * 1.6) return; // השם נשבר לשתי שורות
+    gap.style.maxWidth = gap.getBoundingClientRect().width + 'px';
+    requestAnimationFrame(() => {
+      name.classList.add('merged');
+      setTimeout(() => name.classList.remove('merged'), 1500);
+    });
+  }
 
   const start = () => {
     let t = 450;

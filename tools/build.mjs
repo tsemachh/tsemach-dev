@@ -112,7 +112,7 @@ function page(L) {
   <div class="hero__body">
     <button class="ready" type="button" aria-label="READY – ${L.lang === 'he' ? 'להציג שוב את הפתיח' : 'replay the intro'}">READY<span class="cursor" aria-hidden="true"></span></button>
     <h1 class="name">
-      <span class="name__smooth">${esc(L.name)}</span>
+      <span class="name__smooth">${esc(L.nameParts[0])}<span class="name__sp"> </span><span class="name__gap">${esc(L.nameParts[1])}</span>${esc(L.nameParts[2])}</span>
       <span class="name__pixel" aria-hidden="true">${esc(L.name)}</span>
     </h1>
     <p class="tagline">${esc(L.tagline)}</p>
@@ -186,6 +186,7 @@ for (const l of ['he', 'en']) ogVer[l] = createHash('sha1').update(await readFil
 for (const L of Object.values(t)) for (const k of ['ogDescription', 'description']) {
   if (L[k].length < 100) throw new Error(`${L.lang}.${k} is ${L[k].length} chars; LinkedIn wants at least 100`);
 }
+for (const L of Object.values(t)) if (L.nameParts[0] + ' ' + L.nameParts[1] + L.nameParts[2] !== L.name) throw new Error(`${L.lang}.nameParts must join to name`);
 const pages = { he: page(t.he), en: page(t.en) };
 await writeFile(`${OUT}/index.html`, pages.he.html);
 await writeFile(`${OUT}/en/index.html`, pages.en.html);

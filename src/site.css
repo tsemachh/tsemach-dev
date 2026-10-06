@@ -120,6 +120,15 @@ main:focus { outline: none; }
 }
 .name:lang(he) { font-size: clamp(4rem, 23vw, 15rem); }
 .name > span { grid-area: 1 / 1; }
+/* "צמחדד": הרווח והאות הראשונה של המילה השנייה מתכווצים, והח' המשותפת מחברת את המילים */
+.name__gap {
+  display: inline-block; overflow: hidden; vertical-align: top;
+  padding-block: .2em; margin-block: -.2em;
+  transition: max-width 520ms var(--ease-out), opacity 260ms ease;
+}
+.name.merged .name__gap { max-width: 0 !important; opacity: 0; }
+.name__sp { transition: font-size 520ms var(--ease-out); }
+.name.merged .name__sp { font-size: 0; }
 .name__pixel { font-family: 'Rubik Pixels', Rubik, monospace; font-weight: 400; visibility: hidden; }
 
 .tagline {
