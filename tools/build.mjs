@@ -80,7 +80,7 @@ function page(L) {
 <meta property="og:description" content="${esc(L.ogDescription)}">
 <meta property="og:url" content="${url}">
 <meta property="og:locale" content="${L.lang === 'he' ? 'he_IL' : 'en_US'}">
-<meta property="og:image" content="${site.origin}/og-${L.lang}.png">
+<meta property="og:image" content="${site.origin}/og-${L.lang}.png?v=${ogVer[L.lang]}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="${esc(L.name)}: ${L.lang === 'he' ? 'השם נבנה מפיקסלים של חייזרים מתפוצצים במשחק ירי בסגנון 8 ביט' : 'the name assembled from the pixels of exploding aliens in an 8-bit shooter'}">
@@ -177,6 +177,10 @@ function page(L) {
 `;
   return { html, inline: [headScript, speculation, ld] };
 }
+
+// גרסה בכתובת התמונה — LinkedIn ופייסבוק שומרים תמונות לפי כתובת
+const ogVer = {};
+for (const l of ['he', 'en']) ogVer[l] = createHash('sha1').update(await readFile(`public/og-${l}.png`)).digest('hex').slice(0, 8);
 
 const pages = { he: page(t.he), en: page(t.en) };
 await writeFile(`${OUT}/index.html`, pages.he.html);
