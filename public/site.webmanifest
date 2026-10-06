@@ -1,0 +1,12 @@
+{
+  "name": "tsemach.dev",
+  "short_name": "tsemach.dev",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a1a3d",
+  "theme_color": "#1d4596",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

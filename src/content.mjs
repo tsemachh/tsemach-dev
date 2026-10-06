@@ -1,0 +1,161 @@
+// כל התוכן של האתר במקום אחד. כשפרויקט עובר לתת-דומיין — מעדכנים כאן את url בלבד.
+export const site = {
+  origin: 'https://tsemach.dev',
+  github: 'https://github.com/tsemachh',
+  linkedin: '', // TODO: כתובת הפרופיל ב-LinkedIn
+  email: 'me@tsemach.dev',
+  shefing: 'https://shefing.com',
+};
+
+export const projects = [
+  {
+    id: 'daf',
+    group: 'now',
+    url: 'https://daf.tsemach.dev/',
+    repo: 'https://github.com/tsemachh/daf-ai',
+    shot: 'daf',
+    stack: ['Claude', 'Cloudflare Pages', 'Workers'],
+    he: {
+      title: 'דפי חזרה ולימוד',
+      body: 'דף לימוד אינטראקטיבי לכל דף בדף היומי, לחזרה אחרי הלימוד. סוכן AI מכין אותו כל לילה, בודק אותו מול הגמרא ומעדכן את האינדקס.',
+    },
+    en: {
+      title: 'Daf Yomi review pages',
+      body: 'An interactive review page for every daf of the daily Talmud cycle. An AI agent writes it each night, checks it against the Gemara, and updates the index.',
+    },
+  },
+  {
+    id: 'luach',
+    group: 'now',
+    url: 'https://tsemachh.github.io/zohar-michal-loach/',
+    repo: 'https://github.com/tsemachh/zohar-michal-loach',
+    shot: 'luach',
+    stack: ['HTML', 'JavaScript', 'GitHub Pages'],
+    he: {
+      title: 'לוח זמני תפילה – בית הכנסת זוהר מיכל',
+      body: 'לוח שבת ולוחות חגים לבית הכנסת בחומת שמואל, עם גרסה כתמונה לווטסאפ וגרסה לבית. הזמנים לפי לוח אור החיים לירושלים.',
+    },
+    en: {
+      title: 'Zohar Michal prayer times',
+      body: 'Weekly Shabbat and holiday schedules for a Jerusalem synagogue, with a WhatsApp image version and a home version. Times follow the Ohr HaChaim luach.',
+    },
+  },
+  {
+    id: 'atari',
+    group: 'games',
+    url: 'https://tsemachh.github.io/atari-arcade/',
+    repo: 'https://github.com/tsemachh/atari-arcade',
+    shot: 'atari',
+    stack: ['WebAssembly', 'PWA'],
+    he: {
+      title: 'Atari Arcade',
+      body: 'ספריית משחקי Atari 800XL שרצים בדפדפן, במחשב ובטלפון, על אמולטור AltirraSDL שקומפל ל-WebAssembly.',
+    },
+    en: {
+      title: 'Atari Arcade',
+      body: 'A library of Atari 800XL games running in the browser, on desktop and phone, on the AltirraSDL emulator compiled to WebAssembly.',
+    },
+  },
+  {
+    id: 'river',
+    group: 'games',
+    url: 'https://tsemachh.github.io/river-raid/',
+    repo: 'https://github.com/tsemachh/river-raid',
+    shot: 'river',
+    stack: ['Canvas', 'Vanilla JS', 'PWA'],
+    he: {
+      title: 'River Raid',
+      body: 'גרסה חדשה בקובץ HTML אחד למשחק הנהר הקלאסי, לפי הגרסה של ה-800XL. בלי ספריות ובלי build, ועובד גם אופליין.',
+    },
+    en: {
+      title: 'River Raid',
+      body: 'A single-file HTML5 remake of the classic river shooter, modeled on the 800XL version. No libraries, no build step, and it works offline.',
+    },
+  },
+  {
+    id: 'xonix',
+    group: 'games',
+    url: 'https://tsemachh.github.io/xonix/',
+    repo: 'https://github.com/tsemachh/xonix',
+    shot: 'xonix',
+    stack: ['Canvas', 'Vanilla JS', 'Mobile-first'],
+    he: {
+      title: 'Xonix',
+      body: 'משחק כיבוש שטח בסגנון Qix: סוגרים חלקים מהלוח עם השובל ובורחים מהכדורים. נבנה קודם כול לטלפון.',
+    },
+    en: {
+      title: 'Xonix',
+      body: 'A Qix-style territory game: wall off parts of the board with your trail and dodge everything that bounces. Built for the phone first.',
+    },
+  },
+  {
+    id: 'tag',
+    group: 'games',
+    url: 'https://tsemachh.github.io/arcade-tag/',
+    repo: 'https://github.com/tsemachh/arcade-tag',
+    shot: 'tag',
+    shotSrc: 'https://raw.githubusercontent.com/tsemachh/arcade-tag/main/gameplay-preview.png', // המשחק פותח חלון עזרה, אז לוקחים את התמונה מה-repo
+    stack: ['WebRTC', 'Web Audio', 'PWA'],
+    he: {
+      title: 'תופסת ארקייד',
+      body: 'תופסת מינימליסטית בדף אחד. משחקים נגד המחשב או נגד חבר ברשת, ובמצב מכ״ם מוצאים את היריב לפי הצליל.',
+    },
+    en: {
+      title: 'Arcade Tag',
+      body: 'Minimalist tag in a single page. Play the computer or a friend online, and in radar mode find your opponent by sound.',
+    },
+  },
+];
+
+export const t = {
+  he: {
+    lang: 'he', dir: 'rtl', path: '/',
+    title: 'צמח חדד – ארכיטקט תוכנה',
+    description: 'צמח חדד, ארכיטקט תוכנה בכיר מירושלים. 40 שנה של קוד, מה-Atari 800XL ועד סוכני AI. הפרויקטים האישיים שלי במקום אחד.',
+    skip: 'דילוג לתוכן',
+    skipIntro: 'דילוג על הפתיח',
+    name: 'צמח חדד',
+    tagline: 'ארבעים שנה של קוד, מ-800XL ועד סוכני AI.',
+    about: [
+      'אני ארכיטקט תוכנה בכיר ב<a href="https://shefing.com">שפינג</a>, ומתכנת מאז שהמסך הכחול של ה-800XL אמר READY.',
+      'ביום יום אני עובד על ארכיטקטורה, אבטחה ותשתיות ענן. בשעות הפנאי אני בונה מחדש משחקים שגדלתי עליהם, וכלים קטנים לקהילה ולבית המדרש.',
+      'גר בירושלים. איש משפחה.',
+    ],
+    aboutHeading: 'קצת עליי',
+    nowHeading: 'פרויקטים',
+    gamesHeading: 'משחקים',
+    gamesIntro: 'גרסאות חדשות למשחקים מימי ה-8 ביט. כולם רצים בדפדפן, בלי התקנה.',
+    open: 'לפתוח את',
+    code: 'קוד המקור של',
+    codeLabel: 'קוד',
+    contactHeading: 'יצירת קשר',
+    contactBody: 'רוצים לדבר על ארכיטקטורה, על אחד הפרויקטים או על משחקים ישנים? אפשר לכתוב לי.',
+    otherLang: 'English', otherLangCode: 'en', otherPath: '/en/',
+    footer: 'האתר נבנה בלי פריימוורק ובלי עוגיות.',
+  },
+  en: {
+    lang: 'en', dir: 'ltr', path: '/en/',
+    title: 'Tsemach Hadad – software architect',
+    description: 'Tsemach Hadad, senior software architect in Jerusalem. Forty years of code, from the Atari 800XL to AI agents. My personal projects in one place.',
+    skip: 'Skip to content',
+    skipIntro: 'Skip intro',
+    name: 'Tsemach Hadad',
+    tagline: 'Forty years of code, from the 800XL to AI agents.',
+    about: [
+      'I’m a senior software architect at <a href="https://shefing.com">Shefing</a>, and I’ve been programming since the 800XL’s blue screen first said READY.',
+      'By day I work on architecture, security and cloud infrastructure. In my spare time I rebuild the games I grew up with, and small tools for my community and for Torah study.',
+      'I live in Jerusalem. Family man.',
+    ],
+    aboutHeading: 'About me',
+    nowHeading: 'Projects',
+    gamesHeading: 'Games',
+    gamesIntro: 'New takes on games from the 8-bit days. They all run in the browser, nothing to install.',
+    open: 'Open',
+    code: 'Source code for',
+    codeLabel: 'Code',
+    contactHeading: 'Contact',
+    contactBody: 'Want to talk architecture, one of these projects, or old games? Write to me.',
+    otherLang: 'עברית', otherLangCode: 'he', otherPath: '/',
+    footer: 'Built without a framework and without cookies.',
+  },
+};
