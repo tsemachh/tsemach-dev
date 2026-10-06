@@ -2,7 +2,7 @@
 // אין תלויות — Node בלבד. הרצה: npm run build
 import { mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { site, projects, t } from '../src/content.mjs';
+import { site, projects, t, payloadPr } from '../src/content.mjs';
 
 const OUT = 'dist';
 await rm(OUT, { recursive: true, force: true });
@@ -10,13 +10,14 @@ await mkdir(`${OUT}/en`, { recursive: true });
 await cp('public', OUT, { recursive: true });
 await cp('src/site.css', `${OUT}/assets/site.css`);
 await cp('src/intro.js', `${OUT}/assets/intro.js`);
+await cp('src/game.js', `${OUT}/assets/game.js`);
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const sha = s => `'sha256-${createHash('sha256').update(s).digest('base64')}'`;
-const ver = createHash('sha1').update(await readFile('src/site.css') + await readFile('src/intro.js')).digest('hex').slice(0, 8);
+const ver = createHash('sha1').update(await readFile('src/site.css') + await readFile('src/intro.js') + await readFile('src/game.js')).digest('hex').slice(0, 8);
 
 // רץ ב-<head> לפני הציור הראשון: מחליט אם להציג את הפתיח (פעם אחת בכל ביקור, ולא כשמבקשים פחות תנועה)
-const headScript = `try{var d=document.documentElement;if(!sessionStorage.getItem('seen-intro-'+d.lang)&&!location.hash){d.classList.add('intro');if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('calm');setTimeout(function(){d.classList.remove('intro','calm','run','sweep','done')},7000)}}catch(e){}`;
+const headScript = `try{var d=document.documentElement;if(!sessionStorage.getItem('seen-intro-'+d.lang)&&!location.hash){d.classList.add('intro');if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('calm');setTimeout(function(){d.classList.remove('intro','calm','run','sweep','done')},15000)}}catch(e){}`;
 
 const speculation = JSON.stringify({ prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }] });
 
@@ -34,7 +35,7 @@ function project(p, L, i) {
           <h3><a class="project__link" href="${p.url}" aria-label="${esc(L.open)} ${esc(c.title)}">${esc(c.title)}</a></h3>
           <p>${esc(c.body)}</p>
           <ul class="stack" aria-label="${L.lang === 'he' ? 'טכנולוגיות' : 'Built with'}">${p.stack.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
-          <a class="code" href="${p.repo}" aria-label="${esc(L.code)} ${esc(c.title)}"><svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M5.5 4 1.5 8l4 4 1-1-3-3 3-3-1-1Zm5 0-1 1 3 3-3 3 1 1 4-4-4-4Z"/></svg>${esc(L.codeLabel)}</a>
+          ${p.repo ? `<a class="code" href="${p.repo}" aria-label="${esc(L.code)} ${esc(c.title)}"><svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M5.5 4 1.5 8l4 4 1-1-3-3 3-3-1-1Zm5 0-1 1 3 3-3 3 1 1 4-4-4-4Z"/></svg>${esc(L.codeLabel)}</a>` : ''}
         </div>
       </li>`;
 }
@@ -48,14 +49,16 @@ function page(L) {
     name: L.name,
     alternateName: other.name,
     url: site.origin,
-    jobTitle: L.lang === 'he' ? 'ארכיטקט תוכנה בכיר' : 'Senior Software Architect',
+    jobTitle: L.lang === 'he' ? 'ארכיטקט ראשי' : 'Chief Architect',
+    knowsAbout: ['Payload CMS', 'Headless CMS', 'JAMstack', 'Front-end architecture', 'Developer Experience'],
     worksFor: { '@type': 'Organization', name: 'Shefing', url: site.shefing },
     homeLocation: { '@type': 'Place', name: L.lang === 'he' ? 'ירושלים' : 'Jerusalem' },
     sameAs: [site.github, site.linkedin].filter(Boolean),
   });
   const now = projects.filter(p => p.group === 'now');
+  const oss = projects.filter(p => p.group === 'oss');
   const games = projects.filter(p => p.group === 'games');
-  const linkedin = site.linkedin ? `<li><a href="${site.linkedin}">LinkedIn</a></li>` : '';
+  const linkedin = site.linkedin ? `<li><a href="${site.linkedin}" rel="me">LinkedIn</a></li>` : '';
 
   const html = `<!doctype html>
 <html lang="${L.lang}" dir="${L.dir}">
@@ -121,7 +124,19 @@ function page(L) {
     <h2 id="about-h">${esc(L.aboutHeading)}</h2>
     <div class="about__text">
       ${L.about.map(p => `<p>${p}</p>`).join('\n      ')}
+      <ul class="skills" role="list" aria-label="${esc(L.skillsLabel)}">${L.skills.map(k => `<li>${esc(k)}</li>`).join('')}</ul>
     </div>
+  </section>
+
+  <section class="oss" aria-labelledby="oss-h">
+    <div class="games__head">
+      <h2 id="oss-h">${esc(L.ossHeading)}</h2>
+      <p>${esc(L.ossIntro)}</p>
+    </div>
+    <ul class="projects projects--games" role="list">
+      ${oss.map((p, i) => project(p, L, i)).join('\n      ')}
+    </ul>
+    <p class="upstream">${L.ossUpstream.replace('{pr}', payloadPr)}</p>
   </section>
 
   <section class="work" aria-labelledby="now-h">
@@ -146,7 +161,7 @@ function page(L) {
     <p>${esc(L.contactBody)}</p>
     <p class="contact__mail"><a href="mailto:${site.email}">${site.email}</a></p>
     <ul class="links" role="list">
-      <li><a href="${site.github}">GitHub</a></li>
+      <li><a href="${site.github}" rel="me">GitHub</a></li>
       ${linkedin}
     </ul>
   </section>

@@ -167,13 +167,20 @@ main:focus { outline: none; }
 }
 
 .intro.run .hero { clip-path: inset(0 0 0 round 0); }
-.intro.run .boot, .intro.run .skip-intro { opacity: 0; transition: opacity 250ms; }
-.intro.run .hero__body { opacity: 1; }
-.intro.run .name__pixel { visibility: visible; }
-.intro.run .name__smooth { clip-path: inset(0 0 100% 0); }
+.intro.run .boot { opacity: 0; transition: opacity 250ms; }
+.intro.reveal .skip-intro { opacity: 0; transition: opacity 250ms; }
+
+/* משחק הירי (src/game.js) */
+.game { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; touch-action: none; cursor: crosshair; transition: opacity 300ms; }
+.game--out { opacity: 0; pointer-events: none; }
+.skip-intro { z-index: 3; }
+.intro.reveal .hero__body { opacity: 1; }
+.intro.reveal .name__pixel { visibility: visible; }
+.intro.reveal .name__smooth { clip-path: inset(0 0 100% 0); }
+.intro.run .skip-intro { bottom: 1.5rem; inset-inline-end: var(--gutter); }
 
 /* קרן הסריקה: מעל הקו האותיות כבר חלקות, מתחתיו עדיין פיקסלים */
-.intro.sweep .name { --scan: 100%; animation: scan 1100ms cubic-bezier(.45, 0, .2, 1) both; position: relative; }
+.intro.sweep .name { --scan: 100%; animation: scan 800ms cubic-bezier(.45, 0, .2, 1) both; position: relative; }
 @keyframes scan { from { --scan: 0%; } to { --scan: 100%; } }
 .intro.sweep .name__smooth { clip-path: inset(0 0 calc(100% - var(--scan)) 0); }
 .intro.sweep .name__pixel { clip-path: inset(var(--scan) 0 0 0); }
@@ -206,6 +213,15 @@ h2 {
   .about { grid-template-columns: 16rem 1fr; }
   .about h2 { margin: 0; }
 }
+
+/* תחומי התמחות */
+.skills { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.skills li {
+  color: var(--ink); font-weight: 500; font-size: var(--step--1);
+  border: 1px solid var(--line); border-radius: 6px; padding: .35rem .8rem;
+  background: color-mix(in srgb, var(--screen) 14%, transparent);
+}
+.upstream { margin-top: clamp(2rem, 5vw, 3rem); color: var(--muted); }
 
 .projects { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(2.5rem, 6vw, 4.5rem); }
 .project { position: relative; display: grid; gap: 1.25rem; align-items: start; }
@@ -249,7 +265,7 @@ h2 {
 .games__head { display: grid; gap: .5rem 3rem; margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
 .games__head h2 { margin: 0; }
 .games__head p { color: var(--muted); margin: 0; }
-@media (min-width: 52rem) { .games__head { grid-template-columns: 16rem 1fr; align-items: end; } }
+@media (min-width: 52rem) { .games__head { grid-template-columns: minmax(16rem, max-content) 1fr; align-items: end; } }
 
 .projects--games { gap: clamp(2.5rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem); }
 @media (min-width: 44rem) { .projects--games { grid-template-columns: 1fr 1fr; } }
@@ -284,7 +300,7 @@ h2 {
 .intro.calm .boot { inset: 0; padding: clamp(4.5rem, 12vh, 7rem) var(--gutter); }
 .intro.calm .skip-intro { bottom: 1.5rem; inset-inline-end: var(--gutter); }
 .intro.calm .name__pixel, .intro.calm .name__smooth { clip-path: none; transition: opacity 700ms ease; }
-.intro.calm.run .name__smooth { clip-path: none; opacity: 0; }
+.intro.calm.reveal .name__smooth { clip-path: none; opacity: 0; }
 .intro.calm.sweep .name { animation: none; }
 .intro.calm.sweep .name::after { display: none; }
 .intro.calm.sweep .name__smooth { clip-path: none; opacity: 1; }

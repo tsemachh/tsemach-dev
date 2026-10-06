@@ -2,12 +2,46 @@
 export const site = {
   origin: 'https://tsemach.dev',
   github: 'https://github.com/tsemachh',
-  linkedin: '', // TODO: כתובת הפרופיל ב-LinkedIn
+  linkedin: 'https://www.linkedin.com/in/tsemach-hadad/',
   email: 'me@tsemach.dev',
   shefing: 'https://shefing.com',
 };
 
 export const projects = [
+  {
+    id: 'payload-tools',
+    group: 'oss',
+    url: 'https://github.com/shefing/payload-tools',
+    shot: 'payload-tools',
+    shotSrc: 'https://raw.githubusercontent.com/shefing/payload-tools/main/packages/comments/images/img1.png',
+    shotPos: 'left',
+    stack: ['Payload CMS', 'Next.js', 'TypeScript'],
+    he: {
+      title: 'Payload Tools',
+      body: 'אוסף תוספים ל-Payload CMS 3 שמשפרים את העבודה של העורכים: הרשאות RBAC ו-ABAC, תגובות בתוך הטקסט, השוואת טיוטה מול הגרסה המפורסמת, סינון מהיר ועוד.',
+    },
+    en: {
+      title: 'Payload Tools',
+      body: 'A collection of Payload CMS 3 plugins that make editors’ work easier: RBAC and ABAC permissions, inline rich-text comments, draft-vs-published diffs, quick filters and more.',
+    },
+  },
+  {
+    id: 'apireplay',
+    group: 'oss',
+    url: 'https://github.com/shefing/APIReplay',
+    shot: 'apireplay',
+    shotSrc: 'https://raw.githubusercontent.com/shefing/APIReplay/main/apireplay-overview.png',
+    shotPos: 'centre',
+    stack: ['Chrome MV3', 'TypeScript', 'DX'],
+    he: {
+      title: 'API Replay',
+      body: 'תוסף Chrome שמקליט את תעבורת ה-API ומריץ אותה מחדש מקומית, כך שפיתוח ה-Front End נשאר צפוי גם כשהסביבות המשותפות לא יציבות. מקליטים פעם אחת ומשתמשים בהקלטה בפיתוח ובבדיקות.',
+    },
+    en: {
+      title: 'API Replay',
+      body: 'A Chrome extension that records API traffic and replays it locally, so front-end work stays predictable even when shared environments are unstable. Record once, then reuse the fixtures in development and tests.',
+    },
+  },
   {
     id: 'daf',
     group: 'now',
@@ -107,22 +141,29 @@ export const projects = [
   },
 ];
 
+export const payloadPr = 'https://github.com/payloadcms/payload/pull/10807';
+
 export const t = {
   he: {
     lang: 'he', dir: 'rtl', path: '/',
-    title: 'צמח חדד – ארכיטקט תוכנה',
-    description: 'צמח חדד, ארכיטקט תוכנה בכיר מירושלים. 40 שנה של קוד, מה-Atari 800XL ועד סוכני AI. הפרויקטים האישיים שלי במקום אחד.',
+    title: 'צמח חדד – ארכיטקט ראשי בשפינג',
+    description: 'צמח חדד, הארכיטקט הראשי של שפינג. Headless CMS ו-Payload, ארכיטקטורת Front End וחוויית מפתחים. 40 שנה של קוד, מה-800XL ועד סוכני AI.',
     skip: 'דילוג לתוכן',
     skipIntro: 'דילוג על הפתיח',
     name: 'צמח חדד',
     tagline: 'ארבעים שנה של קוד, מ-800XL ועד סוכני AI.',
     about: [
-      'אני ארכיטקט תוכנה בכיר ב<a href="https://shefing.com">שפינג</a>, ומתכנת מאז שהמסך הכחול של ה-800XL אמר READY.',
-      'ביום יום אני עובד על ארכיטקטורה, אבטחה ותשתיות ענן. בשעות הפנאי אני בונה מחדש משחקים שגדלתי עליהם, וכלים קטנים לקהילה ולבית המדרש.',
+      'אני הארכיטקט הראשי של <a href="https://shefing.com">שפינג</a>, ומתכנת מאז שהמסך הכחול של ה-800XL אמר READY.',
+      'אני מתמחה במערכות Headless CMS, ובעיקר ב-Payload CMS, בארכיטקטורת Front End ו-JAMstack ובחוויית המפתחים, לצד אבטחה ותשתיות ענן. בשעות הפנאי אני בונה מחדש משחקים שגדלתי עליהם, וכלים קטנים לקהילה ולבית המדרש.',
       'גר בירושלים. איש משפחה.',
     ],
     aboutHeading: 'קצת עליי',
-    nowHeading: 'פרויקטים',
+    skillsLabel: 'תחומי התמחות',
+    skills: ['Payload CMS', 'Headless CMS', 'JAMstack', 'ארכיטקטורת Front End', 'Developer Experience', 'אבטחה ותשתיות ענן'],
+    ossHeading: 'קוד פתוח בשפינג',
+    ossIntro: 'כלים שפיתחתי בשפינג ושחררנו כקוד פתוח.',
+    ossUpstream: 'אני תורם גם לליבה של Payload: <a href="{pr}">הצגת השדות שהשתנו בלבד בהשוואת גרסאות</a> נכנסה לגרסה הרשמית.',
+    nowHeading: 'פרויקטים אישיים',
     gamesHeading: 'משחקים',
     gamesIntro: 'גרסאות חדשות למשחקים מימי ה-8 ביט. כולם רצים בדפדפן, בלי התקנה.',
     open: 'לפתוח את',
@@ -135,19 +176,24 @@ export const t = {
   },
   en: {
     lang: 'en', dir: 'ltr', path: '/en/',
-    title: 'Tsemach Hadad – software architect',
-    description: 'Tsemach Hadad, senior software architect in Jerusalem. Forty years of code, from the Atari 800XL to AI agents. My personal projects in one place.',
+    title: 'Tsemach Hadad – Chief Architect at Shefing',
+    description: 'Tsemach Hadad, Chief Architect at Shefing. Headless CMS and Payload, front-end architecture and developer experience. Forty years of code, from the 800XL to AI agents.',
     skip: 'Skip to content',
     skipIntro: 'Skip intro',
     name: 'Tsemach Hadad',
     tagline: 'Forty years of code, from the 800XL to AI agents.',
     about: [
-      'I’m a senior software architect at <a href="https://shefing.com">Shefing</a>, and I’ve been programming since the 800XL’s blue screen first said READY.',
-      'By day I work on architecture, security and cloud infrastructure. In my spare time I rebuild the games I grew up with, and small tools for my community and for Torah study.',
+      'I’m the Chief Architect at <a href="https://shefing.com">Shefing</a>, and I’ve been programming since the 800XL’s blue screen first said READY.',
+      'I specialize in headless CMS, especially Payload CMS, front-end and JAMstack architecture, and developer experience, along with security and cloud infrastructure. In my spare time I rebuild the games I grew up with, and small tools for my community and for Torah study.',
       'I live in Jerusalem. Family man.',
     ],
     aboutHeading: 'About me',
-    nowHeading: 'Projects',
+    skillsLabel: 'Areas of expertise',
+    skills: ['Payload CMS', 'Headless CMS', 'JAMstack', 'Front-end architecture', 'Developer Experience', 'Security & cloud infrastructure'],
+    ossHeading: 'Open source at Shefing',
+    ossIntro: 'Tools I built at Shefing and that we released as open source.',
+    ossUpstream: 'I also contribute to Payload core: <a href="{pr}">showing only the modified fields in the version diff</a> was merged upstream.',
+    nowHeading: 'Personal projects',
     gamesHeading: 'Games',
     gamesIntro: 'New takes on games from the 8-bit days. They all run in the browser, nothing to install.',
     open: 'Open',

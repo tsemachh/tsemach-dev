@@ -21,21 +21,25 @@
   const at = (ms, fn) => timers.push(setTimeout(fn, ms));
   let finished = false;
 
+  let game = null;
   function finish() {
     if (finished) return;
     finished = true;
     timers.forEach(clearTimeout);
-    d.classList.add('run', 'sweep', 'done');
+    game?.stop();
+    d.classList.add('run', 'reveal', 'sweep', 'done');
     try { sessionStorage.setItem(key, '1'); } catch {}
-    setTimeout(() => d.classList.remove('intro', 'calm', 'run', 'sweep', 'done'), 800);
+    setTimeout(() => d.classList.remove('intro', 'calm', 'run', 'reveal', 'sweep', 'done'), 800);
     removeEventListener('keydown', skip, true);
     removeEventListener('pointerdown', skip, true);
     removeEventListener('wheel', skip, true);
     removeEventListener('touchmove', skip, true);
   }
+  // מדלגים: Escape, גלילה בעכבר, או כל מקש שאינו שליטה במשחק. נגיעה במסך מנווטת את הספינה ולא מדלגת.
+  const keep = new Set(['Tab', 'Enter', ' ', 'ArrowLeft', 'ArrowRight', 'Shift', 'Alt', 'Control', 'Meta']);
   function skip(e) {
-    if (e.type === 'keydown' && (e.key === 'Tab' || e.key === 'Enter' || e.key === ' ')) return; // מקלדת: אפשר להגיע לכפתור הדילוג ולהפעיל אותו
-    if (e.type === 'pointerdown' && e.target.closest?.('.skip-intro')) return;
+    if (e.type === 'keydown' && keep.has(e.key)) return;
+    if (e.type === 'pointerdown' || e.type === 'touchmove') return;
     finish();
   }
 
@@ -51,10 +55,32 @@
       at(t, () => { typed.textContent = text.slice(0, i); });
       t += 60 + (text[i - 1] === ' ' ? 90 : 0);
     }
-    at(t + 350, () => d.classList.add('run'));
-    at(t + (calm ? 1350 : 1150), () => d.classList.add('sweep'));
-    at(t + (calm ? 2400 : 2350), finish);
+    if (calm) {
+      at(t + 350, () => d.classList.add('run', 'reveal'));
+      at(t + 1350, () => d.classList.add('sweep'));
+      at(t + 2400, finish);
+      return;
+    }
+    at(t + 350, () => {
+      d.classList.add('run');
+      gameModule.then(m => {
+        if (finished) return;
+        game = m.run({ hero: document.querySelector('.hero'), nameEl: document.querySelector('.name__pixel') });
+        game.done.then(() => {
+          if (finished) return;
+          d.classList.add('reveal');
+          game.stop();
+          at(150, () => d.classList.add('sweep'));
+          at(1000, finish);
+        });
+      }).catch(() => { // בלי המשחק: הרצף המקורי
+        d.classList.add('reveal');
+        at(800, () => d.classList.add('sweep'));
+        at(1900, finish);
+      });
+    });
   };
+  const gameModule = calm ? null : import('./game.js?v=' + (document.currentScript?.src.split('v=')[1] || ''));
 
   // מחכים לגופן הפיקסלים כדי שהשלב הראשון לא יופיע בגופן אחר; לכל היותר 600ms
   const ready = document.fonts?.load ? document.fonts.load('1em "Rubik Pixels"') : Promise.resolve();

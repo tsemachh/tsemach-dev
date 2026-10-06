@@ -58,11 +58,13 @@ for (const [engine, name] of [[chromium, 'chromium'], [webkit, 'webkit']]) {
   for (const [motion, path, tag] of [['no-preference', '/', 'he'], ['reduce', '/en/', 'en-calm']]) {
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'dark', reducedMotion: motion });
     const page = await ctx.newPage();
+    page.on('pageerror', e => { failures++; console.log('PAGEERROR', name, tag, e.message); });
     await page.goto(base + path);
     const cls = await page.evaluate(() => document.documentElement.className);
     if (!/intro/.test(cls)) { failures++; console.log('intro did not start', name, tag, cls); }
     let t = 0;
-    for (const ms of [250, 900, 1600, 2300, 2800, 3400, 4600]) {
+    const frames = motion === 'reduce' ? [250, 900, 1600, 2300, 2800, 3400, 4600] : [900, 1800, 2400, 3000, 3600, 4200, 4800, 5400, 6200, 7400];
+    for (const ms of frames) {
       await page.waitForTimeout(ms - t); t = ms;
       await page.screenshot({ path: `check-out/${name}-intro-${tag}-${String(ms).padStart(4, '0')}.png` });
     }
