@@ -12,9 +12,9 @@ await rm(TMP, { recursive: true, force: true });
 await mkdir(TMP, { recursive: true });
 await mkdir('public/clips', { recursive: true });
 
-function encode(input, out, { start = 0, from = 'video' } = {}) {
+function encode(input, out, { start = 0, crop = '' } = {}) {
   const common = ['-y', '-hide_banner', '-loglevel', 'error', ...(start ? ['-ss', String(start)] : []), '-i', input, '-t', String(SECONDS), '-an',
-    '-vf', 'fps=24,scale=480:360:force_original_aspect_ratio=increase,crop=480:360'];
+    '-vf', `${crop ? `crop=${crop},` : ''}fps=24,scale=480:360:force_original_aspect_ratio=increase,crop=480:360`];
   execFileSync(ffmpeg, [...common, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', `${out}.mp4`]);
   execFileSync(ffmpeg, [...common, '-c:v', 'libvpx-vp9', '-crf', '42', '-b:v', '0', '-row-mt', '1', `${out}.webm`]);
 }
@@ -29,13 +29,26 @@ const scripts = {
     }
   },
   async xonix(page) {
-    await page.getByText(/^XONIX$/).first().click().catch(() => {}); // מצב חופשי: אין יצור שרודף אחרי השובל
-    await page.getByRole('button', { name: /^.?\s*play$/i }).first().click();
-    await page.waitForTimeout(2200); // GET READY
-    await page.locator('canvas').first().focus().catch(() => {});
-    // חיתוכים קצרים לאורך הקצה העליון — סוגרים שטח בלי לפגוש כדורים
-    for (const [key, ms] of [['ArrowDown', 320], ['ArrowLeft', 520], ['ArrowUp', 360], ['ArrowLeft', 200], ['ArrowDown', 320], ['ArrowLeft', 520], ['ArrowUp', 360]]) {
-      await page.keyboard.down(key); await page.waitForTimeout(ms); await page.keyboard.up(key);
+    // מצב XONIX (בלי היצור שרודף אחרי השובל), רמה קלה, ושלושה חיתוכים קצרים ליד הקצה העליון
+    await page.getByRole('button', { name: /^XONIX/ }).click();
+    await page.getByRole('button', { name: /^EASY$/ }).click();
+    await page.getByRole('button', { name: /PLAY$/ }).first().click();
+    await page.waitForTimeout(2500); // GET READY
+    for (const [key, ms] of [['ArrowDown', 260], ['ArrowRight', 700], ['ArrowUp', 300], ['ArrowRight', 150], ['ArrowDown', 260], ['ArrowRight', 700], ['ArrowUp', 300], ['ArrowLeft', 100], ['ArrowDown', 420], ['ArrowLeft', 900], ['ArrowUp', 460]]) {
+      await page.keyboard.down(key); await page.waitForTimeout(ms); await page.keyboard.up(key); await page.waitForTimeout(40);
+    }
+    await page.waitForTimeout(600);
+  },
+  async atari(page) {
+    // Pole Position באמולטור האמיתי; טעינת ה-WASM והקושחה לוקחת כ-12 שניות
+    await page.goto('https://tsemachh.github.io/atari-arcade/emu/?lib=PolePosition.xex&fs=1&pal=1&crt=0&experience=convenient&addons=off&joystick=analog&tilt=1&back_url=../&back_label=x', { waitUntil: 'load' });
+    await page.waitForTimeout(12000);
+    await page.mouse.click(400, 350);
+    await page.keyboard.press('F2'); // START
+    await page.waitForTimeout(1500);
+    await page.keyboard.down('ArrowUp');
+    for (const [k, ms] of [['', 2500], ['ArrowLeft', 300], ['', 1200], ['ArrowRight', 350], ['', 1500], ['ArrowLeft', 250], ['', 1500], ['ArrowRight', 300], ['', 1500]]) {
+      if (k) await page.keyboard.down(k); await page.waitForTimeout(ms); if (k) await page.keyboard.up(k);
     }
   },
 };
@@ -60,7 +73,7 @@ for (const p of projects.filter(p => p.clip && (!only || only.includes(p.id)))) 
     await ctx.close();
     const file = await video.path();
     // מתחילים כמה שניות לתוך ההקלטה, אחרי מסכי הפתיחה
-    encode(file, out, { start: p.clip.start ?? Math.max(1.5, 1.2 + startedAfter - SECONDS - 0.3) });
+    encode(file, out, { start: p.clip.start ?? Math.max(1.5, 1.2 + startedAfter - SECONDS - 0.3), crop: p.clip.crop });
     await browser.close();
   }
   const sizes = await Promise.all(['mp4', 'webm'].map(async e => `${e} ${Math.round((await stat(`${out}.${e}`)).size / 1024)}KB`));

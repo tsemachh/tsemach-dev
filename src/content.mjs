@@ -89,6 +89,7 @@ export const projects = [
     url: 'https://tsemachh.github.io/atari-arcade/',
     repo: 'https://github.com/tsemachh/atari-arcade',
     shot: 'atari',
+    clip: { crop: '656:492:20:36' }, // Pole Position במירוץ; החיתוך מוריד את כפתורי האמולטור
     stack: ['WebAssembly', 'PWA'],
     he: {
       hook: '65 משחקים, קליק אחד. האמולטור האמיתי, מקומפל ל-WebAssembly.',
@@ -127,6 +128,7 @@ export const projects = [
     url: 'https://tsemachh.github.io/xonix/',
     repo: 'https://github.com/tsemachh/xonix',
     shot: 'xonix',
+    clip: { start: 5.2 },
     shotPlay: /^.?\s*play$/i,
     stack: ['Canvas', 'Vanilla JS', 'Mobile-first'],
     he: {
