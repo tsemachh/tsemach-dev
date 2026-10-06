@@ -138,6 +138,8 @@ main:focus { outline: none; }
   direction: ltr; unicode-bidi: isolate;
 }
 [dir=ltr] .ready { margin-inline: 0 auto; }
+.ready-static { font-family: 'Rubik Pixels', Rubik, monospace; font-size: clamp(1.1rem, .9rem + 1vw, 1.6rem); letter-spacing: .04em; text-align: left; margin-bottom: 1.5rem; max-width: none; }
+.tagline a { color: #fff; }
 .ready:hover { color: #fff; }
 .cursor {
   display: inline-block; width: .7em; height: .9em; margin-inline-start: .1em;

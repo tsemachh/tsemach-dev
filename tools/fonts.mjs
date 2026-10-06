@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { t } from '../src/content.mjs';
 
 const pixelText = [
-  'READY', 'RUN "TSEMACH"', 'tsemach.dev', 'SCORE 0123456789',
+  'READY', 'RUN "TSEMACH"', 'tsemach.dev', 'SCORE 0123456789', 'ERROR- 404',
   ...Object.values(t).flatMap(L => [L.name, L.aboutHeading, L.ossHeading, L.nowHeading, L.gamesHeading, L.contactHeading]),
 ].join('') + ' ';
 const src = 'node_modules/.cache/rubik-pixels';

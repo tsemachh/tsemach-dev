@@ -30,7 +30,7 @@ function shot(p, L, eager) {
 
 function project(p, L, i) {
   const c = p[L.lang];
-  return `<li class="project project--${p.group}" style="--i:${i}">
+  return `<li class="project project--${p.group}">
         ${shot(p, L, false)}
         <div class="project__text">
           <h3><a class="project__link" href="${p.url}" aria-label="${esc(L.open)} ${esc(c.title)}">${esc(c.title)}</a></h3>
@@ -214,6 +214,29 @@ await writeFile(`${OUT}/_headers`, `/*
 
 /shots/*
   Cache-Control: public, max-age=604800
+`);
+
+await writeFile(`${OUT}/404.html`, `<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 – tsemach.dev</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=${ver}">
+</head>
+<body>
+<header class="hero">
+  <nav class="bar" aria-label="ראשי"><a class="brand" href="/">tsemach.dev</a><a class="lang" href="/en/" hreflang="en" lang="en">English</a></nav>
+  <div class="hero__body">
+    <p class="ready-static" lang="en" dir="ltr">ERROR- 404<br>READY<span class="cursor" aria-hidden="true"></span></p>
+    <h1 class="name">הדף לא נמצא</h1>
+    <p class="tagline">הכתובת לא קיימת באתר. <a href="/">לדף הבית</a> · <a href="/en/" lang="en">Home page</a></p>
+  </div>
+</header>
+</body>
+</html>
 `);
 
 const today = new Date().toISOString().slice(0, 10);
