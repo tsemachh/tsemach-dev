@@ -68,7 +68,7 @@ export const projects = [
   {
     id: 'luach',
     group: 'now',
-    url: 'https://tsemachh.github.io/zohar-michal-loach/',
+    url: 'https://luach.tsemach.dev/',
     repo: 'https://github.com/tsemachh/zohar-michal-loach',
     shot: 'luach',
     stack: ['HTML', 'JavaScript', 'GitHub Pages'],
