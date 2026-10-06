@@ -182,6 +182,10 @@ function page(L) {
 const ogVer = {};
 for (const l of ['he', 'en']) ogVer[l] = createHash('sha1').update(await readFile(`public/og-${l}.png`)).digest('hex').slice(0, 8);
 
+// LinkedIn מזהיר על תיאור קצר מ-100 תווים
+for (const L of Object.values(t)) for (const k of ['ogDescription', 'description']) {
+  if (L[k].length < 100) throw new Error(`${L.lang}.${k} is ${L[k].length} chars; LinkedIn wants at least 100`);
+}
 const pages = { he: page(t.he), en: page(t.en) };
 await writeFile(`${OUT}/index.html`, pages.he.html);
 await writeFile(`${OUT}/en/index.html`, pages.en.html);
