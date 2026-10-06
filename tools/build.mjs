@@ -213,7 +213,7 @@ function page(L) {
 </main>
 
 <footer class="foot">
-  <p>© ${new Date().getFullYear()} ${esc(L.name)}. ${esc(L.footer)}</p>
+  <p>© ${new Date().getFullYear()} ${esc(L.name)}. ${esc(L.footer)} <a href="${site.source}">${esc(L.sourceLabel)}</a></p>
   <a href="${L.otherPath}" hreflang="${other.lang}" lang="${other.lang}">${esc(L.otherLang)}</a>
 </footer>
 </body>
