@@ -35,6 +35,7 @@ for (const [engine, name] of [[chromium, 'chromium'], [webkit, 'webkit']]) {
     for (const scheme of ['dark', 'light']) {
       if (name === 'webkit' && (tag === 'desktop' || scheme === 'light')) continue;
       const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 2, colorScheme: scheme, reducedMotion: 'reduce' });
+      await ctx.addInitScript(() => { try { sessionStorage.setItem('seen-intro-he', '1'); sessionStorage.setItem('seen-intro-en', '1'); } catch {} }); // בדיקת הדף עצמו, בלי הפתיח
       for (const path of ['/', '/en/']) {
         const page = await ctx.newPage();
         const errs = [];
@@ -53,17 +54,26 @@ for (const [engine, name] of [[chromium, 'chromium'], [webkit, 'webkit']]) {
       await ctx.close();
     }
   }
-  // הפתיח עצמו — פריימים לאורך הזמן
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'dark' });
-  const page = await ctx.newPage();
-  await page.goto(base + '/');
-  for (const ms of [250, 900, 1600, 2300, 2800, 3400, 4600]) {
-    await page.waitForTimeout(ms - (page._t || 0)); page._t = ms;
-    await page.screenshot({ path: `check-out/${name}-intro-${String(ms).padStart(4, '0')}.png` });
+  // הפתיח עצמו — פריימים לאורך הזמן: רגיל בעברית, ובלי תנועה באנגלית
+  for (const [motion, path, tag] of [['no-preference', '/', 'he'], ['reduce', '/en/', 'en-calm']]) {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, colorScheme: 'dark', reducedMotion: motion });
+    const page = await ctx.newPage();
+    await page.goto(base + path);
+    const cls = await page.evaluate(() => document.documentElement.className);
+    if (!/intro/.test(cls)) { failures++; console.log('intro did not start', name, tag, cls); }
+    let t = 0;
+    for (const ms of [250, 900, 1600, 2300, 2800, 3400, 4600]) {
+      await page.waitForTimeout(ms - t); t = ms;
+      await page.screenshot({ path: `check-out/${name}-intro-${tag}-${String(ms).padStart(4, '0')}.png` });
+    }
+    const left = await page.evaluate(() => document.documentElement.className);
+    if (left) { failures++; console.log('intro classes left behind:', name, tag, left); }
+    // READY מפעיל שוב
+    await page.click('.ready'); await page.waitForLoadState('load');
+    const again = await page.evaluate(() => document.documentElement.className);
+    if (!/intro/.test(again)) { failures++; console.log('replay failed', name, tag, again); }
+    await ctx.close();
   }
-  const left = await page.evaluate(() => document.documentElement.className);
-  if (left) { failures++; console.log('intro classes left behind:', left); }
-  await ctx.close();
   await browser.close();
 }
 server.close();

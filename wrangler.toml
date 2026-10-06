@@ -1,0 +1,6 @@
+# Cloudflare Pages — החשבון האישי (שם נמצא ה-zone של tsemach.dev).
+# ה-API token לא נשמר כאן: הוא נקרא מ-.env (ראה .env.example). כך לא נוגעים בהתחברות של wrangler לחשבון של שפינג.
+name = "tsemach-dev"
+account_id = "39119b45dc8ef2a6943ac33a99def6a0"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-01"

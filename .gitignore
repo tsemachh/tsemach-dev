@@ -2,3 +2,5 @@ node_modules/
 dist/
 check-out/
 .DS_Store
+.env
+.wrangler/

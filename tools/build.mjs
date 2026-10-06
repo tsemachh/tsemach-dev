@@ -16,7 +16,7 @@ const sha = s => `'sha256-${createHash('sha256').update(s).digest('base64')}'`;
 const ver = createHash('sha1').update(await readFile('src/site.css') + await readFile('src/intro.js')).digest('hex').slice(0, 8);
 
 // רץ ב-<head> לפני הציור הראשון: מחליט אם להציג את הפתיח (פעם אחת בכל ביקור, ולא כשמבקשים פחות תנועה)
-const headScript = `try{var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('seen-intro')&&!location.hash){d.classList.add('intro');setTimeout(function(){d.classList.remove('intro','run','sweep','done')},7000)}}catch(e){}`;
+const headScript = `try{var d=document.documentElement;if(!sessionStorage.getItem('seen-intro-'+d.lang)&&!location.hash){d.classList.add('intro');if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('calm');setTimeout(function(){d.classList.remove('intro','calm','run','sweep','done')},7000)}}catch(e){}`;
 
 const speculation = JSON.stringify({ prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }] });
 
@@ -106,7 +106,7 @@ function page(L) {
   </div>
 
   <div class="hero__body">
-    <p class="ready" aria-hidden="true">READY<span class="cursor"></span></p>
+    <button class="ready" type="button" aria-label="READY – ${L.lang === 'he' ? 'להציג שוב את הפתיח' : 'replay the intro'}">READY<span class="cursor" aria-hidden="true"></span></button>
     <h1 class="name">
       <span class="name__smooth">${esc(L.name)}</span>
       <span class="name__pixel" aria-hidden="true">${esc(L.name)}</span>

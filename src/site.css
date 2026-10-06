@@ -132,8 +132,13 @@ main:focus { outline: none; }
 }
 
 .ready, .boot { font-family: 'Rubik Pixels', Rubik, monospace; font-size: clamp(1.1rem, .9rem + 1vw, 1.6rem); letter-spacing: .04em; }
-.ready { margin: 0 0 clamp(.5rem, 2vh, 1.25rem); max-width: none; direction: ltr; text-align: end; unicode-bidi: isolate; }
-[dir=ltr] .ready { text-align: start; }
+.ready {
+  display: block; margin: 0 0 clamp(.5rem, 2vh, 1.25rem) auto; padding: .25rem 0; min-height: 44px;
+  background: none; border: 0; color: inherit; cursor: pointer;
+  direction: ltr; unicode-bidi: isolate;
+}
+[dir=ltr] .ready { margin-inline: 0 auto; }
+.ready:hover { color: #fff; }
 .cursor {
   display: inline-block; width: .7em; height: .9em; margin-inline-start: .1em;
   vertical-align: -.1em; background: currentColor;
@@ -269,9 +274,21 @@ h2 {
 @view-transition { navigation: auto; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0s !important; animation-iteration-count: 1 !important; transition-duration: 0s !important; }
   @view-transition { navigation: none; }
 }
+
+/* ───────── הפתיח בלי תנועה (הפחתת תנועה במערכת) ─────────
+   אין הגדלה של המסך ואין קרן סריקה; רק הקלדה ומעבר שקיפות מפיקסלים לאותיות חלקות. */
+.intro.calm .hero { clip-path: none; transition: none; }
+.intro.calm body { background: var(--base); }
+.intro.calm .boot { inset: 0; padding: clamp(4.5rem, 12vh, 7rem) var(--gutter); }
+.intro.calm .skip-intro { bottom: 1.5rem; inset-inline-end: var(--gutter); }
+.intro.calm .name__pixel, .intro.calm .name__smooth { clip-path: none; transition: opacity 700ms ease; }
+.intro.calm.run .name__smooth { clip-path: none; opacity: 0; }
+.intro.calm.sweep .name { animation: none; }
+.intro.calm.sweep .name::after { display: none; }
+.intro.calm.sweep .name__smooth { clip-path: none; opacity: 1; }
+.intro.calm.sweep .name__pixel { clip-path: none; opacity: 0; }
 
 @media print {
   .hero { min-height: auto; background: none; color: #000; }
