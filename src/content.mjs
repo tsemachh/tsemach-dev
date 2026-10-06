@@ -212,7 +212,7 @@ export const t = {
     ogDescription: 'ארכיטקט ראשי בשפינג, מתמחה ב-Payload CMS, בארכיטקטורת Front End ובחוויית מפתחים. ארבעים שנה של קוד, מה-800XL ועד סוכני AI.',
     tagline: 'ארבעים שנה של קוד, מ-800XL ועד סוכני AI.',
     about: [
-      'אני קם כל בוקר כדי לעשות טוב בעולם. טכנולוגיה ובנייה של דברים הן התשוקה שלי, ואני מכור לגרום לדברים לקרות, באיכות שאני דורש.',
+      'אני קם כל בוקר כדי לעשות טוב בעולם. טכנולוגיה ובנייה של דברים הן התשוקה שלי, ואני מכור לגרום לדברים לקרות, באיכות שאני דורש. אני מאמין ב-KISS ובקוד פתוח: פשוט ככל האפשר, ופתוח לכולם.',
       'אני הארכיטקט הראשי של <a href="https://shefing.com">שפינג</a>, ומתכנת מאז שהמסך הכחול של ה-800XL אמר READY. אני מתמחה במערכות Headless CMS, ובעיקר ב-Payload CMS, בארכיטקטורת Front End ו-JAMstack ובחוויית המפתחים, לצד אבטחה ותשתיות ענן.',
       'בשעות הפנאי אני בונה מחדש משחקים שגדלתי עליהם, וכלים קטנים לקהילה ולבית המדרש.',
       'נולדתי בתוניסיה וגר בירושלים. איש משפחה למופת, אבא מושלם :-)',
@@ -255,7 +255,7 @@ export const t = {
     ogDescription: 'Chief Architect at Shefing, specializing in Payload CMS, front-end architecture and developer experience. Forty years of code, from the 800XL to AI agents.',
     tagline: 'Forty years of code, from the 800XL to AI agents.',
     about: [
-      'I wake up every morning to do some good in the world. I’m passionate about technology and building things, and addicted to making them happen, at the quality I demand.',
+      'I wake up every morning to do some good in the world. I’m passionate about technology and building things, and addicted to making them happen, at the quality I demand. I believe in KISS and open source: as simple as possible, and open to everyone.',
       'I’m the Chief Architect at <a href="https://shefing.com">Shefing</a>, and I’ve been programming since the 800XL’s blue screen first said READY. I specialize in headless CMS, especially Payload CMS, front-end and JAMstack architecture, and developer experience, along with security and cloud infrastructure.',
       'In my spare time I rebuild the games I grew up with, and small tools for my community and for Torah study.',
       'Born in Tunisia, living in Jerusalem. Family man.',
