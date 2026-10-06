@@ -41,7 +41,7 @@ const scripts = {
   },
   async atari(page) {
     // Pole Position באמולטור האמיתי; טעינת ה-WASM והקושחה לוקחת כ-12 שניות
-    await page.goto('https://tsemachh.github.io/atari-arcade/emu/?lib=PolePosition.xex&fs=1&pal=1&crt=0&experience=convenient&addons=off&joystick=analog&tilt=1&back_url=../&back_label=x', { waitUntil: 'load' });
+    await page.goto('https://games.tsemach.dev/atari-arcade/emu/?lib=PolePosition.xex&fs=1&pal=1&crt=0&experience=convenient&addons=off&joystick=analog&tilt=1&back_url=../&back_label=x', { waitUntil: 'load' });
     await page.waitForTimeout(12000);
     await page.mouse.click(400, 350);
     await page.keyboard.press('F2'); // START

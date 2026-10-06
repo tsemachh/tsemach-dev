@@ -86,7 +86,7 @@ export const projects = [
   {
     id: 'atari',
     group: 'games',
-    url: 'https://tsemachh.github.io/atari-arcade/',
+    url: 'https://games.tsemach.dev/atari-arcade/',
     repo: 'https://github.com/tsemachh/atari-arcade',
     shot: 'atari',
     clip: { crop: '656:492:20:36' }, // Pole Position במירוץ; החיתוך מוריד את כפתורי האמולטור
@@ -105,7 +105,7 @@ export const projects = [
   {
     id: 'river',
     group: 'games',
-    url: 'https://tsemachh.github.io/river-raid/',
+    url: 'https://games.tsemach.dev/river-raid/',
     repo: 'https://github.com/tsemachh/river-raid',
     shot: 'river',
     clip: { start: 2.2 },
@@ -125,7 +125,7 @@ export const projects = [
   {
     id: 'xonix',
     group: 'games',
-    url: 'https://tsemachh.github.io/xonix/',
+    url: 'https://games.tsemach.dev/xonix/',
     repo: 'https://github.com/tsemachh/xonix',
     shot: 'xonix',
     clip: { start: 5.2 },
@@ -145,7 +145,7 @@ export const projects = [
   {
     id: 'tag',
     group: 'games',
-    url: 'https://tsemachh.github.io/arcade-tag/',
+    url: 'https://games.tsemach.dev/arcade-tag/',
     repo: 'https://github.com/tsemachh/arcade-tag',
     shot: 'tag',
     clip: { gif: 'https://raw.githubusercontent.com/tsemachh/arcade-tag/main/gameplay.gif', start: 1.5 },
