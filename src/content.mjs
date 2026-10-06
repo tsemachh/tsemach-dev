@@ -96,6 +96,7 @@ export const projects = [
     url: 'https://tsemachh.github.io/river-raid/',
     repo: 'https://github.com/tsemachh/river-raid',
     shot: 'river',
+    shotPlay: [/start game/i, /got it/i], // צילום מתוך המשחק, לא ממסך הפתיחה
     stack: ['Canvas', 'Vanilla JS', 'PWA'],
     he: {
       title: 'River Raid',
@@ -112,6 +113,7 @@ export const projects = [
     url: 'https://tsemachh.github.io/xonix/',
     repo: 'https://github.com/tsemachh/xonix',
     shot: 'xonix',
+    shotPlay: /^.?\s*play$/i,
     stack: ['Canvas', 'Vanilla JS', 'Mobile-first'],
     he: {
       title: 'Xonix',

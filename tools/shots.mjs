@@ -10,7 +10,7 @@ const ctx = await browser.newContext({
   colorScheme: 'dark',
   locale: 'he-IL',
 });
-for (const p of projects) {
+for (const p of projects.filter(p => !process.env.ONLY || process.env.ONLY.split(',').includes(p.id))) { // ONLY=river,xonix לצילום חלקי
   if (p.shotSrc) { // תמונה קבועה מה-repo (ראה content.mjs)
     const buf = Buffer.from(await (await fetch(p.shotSrc)).arrayBuffer());
     for (const w of [480, 960]) {
@@ -26,6 +26,14 @@ for (const p of projects) {
     await page.keyboard.press('Escape'); // סוגר חלונות עזרה שנפתחים בכניסה
     await page.getByRole('button', { name: /^(הבנתי|Got it|OK)$/ }).first().click({ timeout: 1500 }).catch(() => {});
     await page.waitForTimeout(400);
+    if (p.shotPlay) {
+      for (const name of [].concat(p.shotPlay)) {
+        await page.getByRole('button', { name }).first().click({ timeout: 2500 })
+          .catch(() => page.getByText(name).first().click({ timeout: 2500 }));
+        await page.waitForTimeout(700);
+      }
+      await page.waitForTimeout(2400);
+    }
     const png = await page.screenshot({ type: 'png' });
     for (const w of [480, 960]) {
       await sharp(png).resize(w).webp({ quality: 74 }).toFile(`public/shots/${p.shot}-${w}.webp`);

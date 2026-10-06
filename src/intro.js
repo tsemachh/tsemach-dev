@@ -7,7 +7,7 @@
   const key = 'seen-intro-' + d.lang;
 
   document.querySelector('.ready')?.addEventListener('click', () => {
-    try { sessionStorage.removeItem(key); } catch {}
+    try { sessionStorage.setItem('force-play', '1'); } catch {}
     scrollTo(0, 0);
     location.reload();
   });
