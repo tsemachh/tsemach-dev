@@ -17,10 +17,12 @@ export const projects = [
     shotPos: 'left',
     stack: ['Payload CMS', 'Next.js', 'TypeScript'],
     he: {
+      hook: 'נולד מבעיות UX אמיתיות של עורכים בפרויקטים ארגוניים, ושוחרר לקהילה. כ-180 כוכבים ב-GitHub.',
       title: 'Payload Tools',
       body: 'אוסף תוספים ל-Payload CMS 3 שמשפרים את העבודה של העורכים: הרשאות RBAC ו-ABAC, תגובות בתוך הטקסט, השוואת טיוטה מול הגרסה המפורסמת, סינון מהיר ועוד.',
     },
     en: {
+      hook: 'Born from real editor UX problems on enterprise projects, then released to the community. About 180 stars on GitHub.',
       title: 'Payload Tools',
       body: 'A collection of Payload CMS 3 plugins that make editors’ work easier: RBAC and ABAC permissions, inline rich-text comments, draft-vs-published diffs, quick filters and more.',
     },
@@ -34,10 +36,12 @@ export const projects = [
     shotPos: 'centre',
     stack: ['Chrome MV3', 'TypeScript', 'DX'],
     he: {
+      hook: 'להמשיך לפתח גם כשה-API המרכזי איטי, נופל או משתנה.',
       title: 'API Replay',
       body: 'תוסף Chrome שמקליט את תעבורת ה-API ומריץ אותה מחדש מקומית, כך שפיתוח ה-Front End נשאר צפוי גם כשהסביבות המשותפות לא יציבות. מקליטים פעם אחת ומשתמשים בהקלטה בפיתוח ובבדיקות.',
     },
     en: {
+      hook: 'Keep building even when the central API is slow, down or changing.',
       title: 'API Replay',
       body: 'A Chrome extension that records API traffic and replays it locally, so front-end work stays predictable even when shared environments are unstable. Record once, then reuse the fixtures in development and tests.',
     },
@@ -50,10 +54,12 @@ export const projects = [
     shot: 'daf',
     stack: ['Claude', 'Cloudflare Pages', 'Workers'],
     he: {
+      hook: 'כל לילה סוכן AI מכין דף חדש ובודק אותו מול לשון הגמרא. ארבע פעמים 100 ב-Lighthouse.',
       title: 'דפי חזרה ולימוד',
       body: 'דף לימוד אינטראקטיבי לכל דף בדף היומי, לחזרה אחרי הלימוד. סוכן AI מכין אותו כל לילה, בודק אותו מול הגמרא ומעדכן את האינדקס.',
     },
     en: {
+      hook: 'Every night an AI agent prepares a new page and checks it against the Gemara text. Four 100s in Lighthouse.',
       title: 'Daf Yomi review pages',
       body: 'An interactive review page for every daf of the daily Talmud cycle. An AI agent writes it each night, checks it against the Gemara, and updates the index.',
     },
@@ -66,10 +72,12 @@ export const projects = [
     shot: 'luach',
     stack: ['HTML', 'JavaScript', 'GitHub Pages'],
     he: {
+      hook: 'תוך יום הלוחות היו מודפסים ותלויים על לוח בית הכנסת. משהו פיזי בתוך כל הווירטואליות.',
       title: 'לוח זמני תפילה – בית הכנסת זוהר מיכל',
       body: 'לוח שבת ולוחות חגים לבית הכנסת בחומת שמואל, עם גרסה כתמונה לווטסאפ וגרסה לבית. הזמנים לפי לוח אור החיים לירושלים.',
     },
     en: {
+      hook: 'Within a day the sheets were printed and hanging on the synagogue board. Something physical amid all the virtual.',
       title: 'Zohar Michal prayer times',
       body: 'Weekly Shabbat and holiday schedules for a Jerusalem synagogue, with a WhatsApp image version and a home version. Times follow the Ohr HaChaim luach.',
     },
@@ -82,10 +90,12 @@ export const projects = [
     shot: 'atari',
     stack: ['WebAssembly', 'PWA'],
     he: {
+      hook: '65 משחקים, קליק אחד. האמולטור האמיתי, מקומפל ל-WebAssembly.',
       title: 'Atari Arcade',
       body: 'ספריית משחקי Atari 800XL שרצים בדפדפן, במחשב ובטלפון, על אמולטור AltirraSDL שקומפל ל-WebAssembly.',
     },
     en: {
+      hook: '65 titles, one click away. The real emulator, compiled to WebAssembly.',
       title: 'Atari Arcade',
       body: 'A library of Atari 800XL games running in the browser, on desktop and phone, on the AltirraSDL emulator compiled to WebAssembly.',
     },
@@ -99,10 +109,12 @@ export const projects = [
     shotPlay: [/start game/i, /got it/i], // צילום מתוך המשחק, לא ממסך הפתיחה
     stack: ['Canvas', 'Vanilla JS', 'PWA'],
     he: {
+      hook: 'המשחק כולו נכנס ב-4KB של ROM. הפוסט שכתבתי עליו ארוך ממנו.',
       title: 'River Raid',
       body: 'גרסה חדשה בקובץ HTML אחד למשחק הנהר הקלאסי, לפי הגרסה של ה-800XL. בלי ספריות ובלי build, ועובד גם אופליין.',
     },
     en: {
+      hook: 'The whole game fits in 4 KB of ROM. My post about it is longer than the game.',
       title: 'River Raid',
       body: 'A single-file HTML5 remake of the classic river shooter, modeled on the 800XL version. No libraries, no build step, and it works offline.',
     },
@@ -116,10 +128,12 @@ export const projects = [
     shotPlay: /^.?\s*play$/i,
     stack: ['Canvas', 'Vanilla JS', 'Mobile-first'],
     he: {
+      hook: 'שני חיילי צה״ל כתבו את הגרסה שכל העולם שיחק, בזמן השירות הצבאי.',
       title: 'Xonix',
       body: 'משחק כיבוש שטח בסגנון Qix: סוגרים חלקים מהלוח עם השובל ובורחים מהכדורים. נבנה קודם כול לטלפון.',
     },
     en: {
+      hook: 'Two IDF soldiers wrote the version the whole world played, during their military service.',
       title: 'Xonix',
       body: 'A Qix-style territory game: wall off parts of the board with your trail and dodge everything that bounces. Built for the phone first.',
     },
@@ -133,15 +147,53 @@ export const projects = [
     shotSrc: 'https://raw.githubusercontent.com/tsemachh/arcade-tag/main/gameplay-preview.png', // המשחק פותח חלון עזרה, אז לוקחים את התמונה מה-repo
     stack: ['WebRTC', 'Web Audio', 'PWA'],
     he: {
+      hook: 'בגיל 13 כתבתי אותו ב-BASIC על ה-800XL בחדר. עכשיו הוא חזר, עם משחק רשת ומכ״ם קולי.',
       title: 'תופסת ארקייד',
       body: 'תופסת מינימליסטית בדף אחד. משחקים נגד המחשב או נגד חבר ברשת, ובמצב מכ״ם מוצאים את היריב לפי הצליל.',
     },
     en: {
+      hook: 'I wrote it in BASIC at 13, on the 800XL in my room. Now it’s back, with online play and sound radar.',
       title: 'Arcade Tag',
       body: 'Minimalist tag in a single page. Play the computer or a friend online, and in radar mode find your opponent by sound.',
     },
   },
 ];
+
+// מסלול הקריירה, משלב 0 (ה-800XL בחדר) ועד היום. מבוסס על פרופיל ה-LinkedIn.
+export const career = [
+  { level: 0, years: { he: 'גיל 13', en: 'Age 13' },
+    he: { title: 'Atari 800XL, בחדר', body: 'משחק תופסת ב-BASIC שכל המשפחה שיחקה. החלום להפוך אותו ל"משחק אמיתי" נשאר איתי.' },
+    en: { title: 'Atari 800XL, in my room', body: 'A tag game in BASIC the whole family played. The dream of making it a “real game” stayed with me.' } },
+  { level: 1, years: { he: '1996–2013', en: '1996–2013' },
+    he: { title: 'Amdocs', body: '17 שנה בפיתוח תשתיות J2EE ותשתיות Web, כמומחה תשתיות.' },
+    en: { title: 'Amdocs', body: '17 years building J2EE frameworks and web infrastructure, as an infrastructure expert.' } },
+  { level: 2, years: { he: '2013–2018', en: '2013–2018' },
+    he: { title: 'ביטוח לאומי · ראש צוות תשתיות Front End', body: 'בניתי מאפס את תשתית ה-Front End של "תבל", מערכת השירות הלאומית הגדולה בישראל, והובלתי את הצוות חמש שנים.' },
+    en: { title: 'National Insurance Institute · Front-end infrastructure lead', body: 'Built the front-end infrastructure of Tevel, Israel’s largest social service platform, from scratch, and led the team for five years.' } },
+  { level: 3, years: { he: '2018–2022', en: '2018–2022' },
+    he: { title: 'ביטוח לאומי · ארכיטקט פתרונות', body: 'העברתי את "תבל" למיקרו-שירותים עם Spring Boot וענן, למערכת שמשרתת מיליוני אזרחים, ושיניתי את חוויית הפיתוח של יותר מ-100 מפתחים.' },
+    en: { title: 'National Insurance Institute · Solutions architect', body: 'Moved Tevel to microservices with Spring Boot and the cloud, serving millions of citizens, and changed the developer experience for over 100 developers.' } },
+  { level: 4, years: { he: '2022–היום', en: '2022–now' },
+    he: { title: 'שפינג · ארכיטקט ראשי', body: 'פלטפורמות תוכן וארגוניות ללקוחות, מהרעיון ועד הייצור. ארכיטקטורת מוצר IAST ב-Checkmarx, תרומה לקוד של Payload, מערכת ארכוב Web ארגונית מאפס, וחניכת ג׳וניורים.' },
+    en: { title: 'Shefing · Chief Architect', body: 'Enterprise and content platforms for clients, from concept to production. IAST product architecture at Checkmarx, contributions to Payload, a corporate web-archiving system built from nothing, and mentoring juniors.' } },
+];
+
+// מה שכתבתי ב-LinkedIn
+export const notes = [
+  { date: '2026-10-04', lang: 'he',
+    he: { title: 'קלוד מול שפה בת 1700 שנה', body: 'איך בניתי עם Opus 5.5 דפי חזרה לדף היומי: הגדרת מוצר, ארכיטקטורה וסוכנים שבודקים את מה שאני פחות מבין.' },
+    en: { title: 'Claude vs. a 1,700-year-old language', body: 'Building Daf Yomi review pages with Opus 5.5: product definition, architecture, and agents that check what I understand less.' } },
+  { date: '2026-09-15', lang: 'en',
+    he: { title: 'Git או מסד נתונים?', body: 'רוב האפליקציות הן תוכן, ממשק ניהול ואפליקציה לצרכן. השאלה היא איפה אתם בדרך, ומה עולה הצעד הבא. Sveltia מול Payload.' },
+    en: { title: 'Git or a database?', body: 'Most apps are content, an admin over it, and a consumer app. The question is where you are on that path, and what the next step costs. Sveltia vs. Payload.' } },
+  { date: '2026-09-15', lang: 'he',
+    he: { title: 'המודל לא עומד לדין', body: 'אפשר להאציל למודל כתיבה, ניתוח והצעות. את האחריות אי אפשר להאציל.' },
+    en: { title: 'The model doesn’t stand trial', body: 'You can delegate writing, analysis and suggestions to a model. You can’t delegate the accountability.' } },
+  { date: '2026-05-12', lang: 'en',
+    he: { title: 'Intelligent Static', body: 'מעבר לוויכוח SSG מול דינמי: ריענון אטומי של המטמון עם Payload 3, ונתונים שנשארים מאחורי "מגן סטטי".' },
+    en: { title: 'Intelligent Static', body: 'Beyond SSG vs. dynamic: atomic cache revalidation with Payload 3, and data that stays behind a “static shield”.' } },
+];
+export const notesUrl = 'https://www.linkedin.com/in/tsemach-hadad/recent-activity/all/';
 
 export const payloadPr = 'https://github.com/payloadcms/payload/pull/10807';
 
@@ -163,6 +215,15 @@ export const t = {
       'גר בירושלים. איש משפחה למופת, אבא מושלם :-)',
     ],
     aboutHeading: 'קצת עליי',
+    nav: { about: 'עליי', career: 'מסלול', oss: 'שפינג', projects: 'פרויקטים', games: 'משחקים', notes: 'כתבתי', contact: 'קשר' },
+    navLabel: 'פרקים בדף',
+    careerHeading: 'המסלול',
+    careerIntro: 'שלושים שנה של מערכות שמשרתות מיליונים, ועוד עשר לפני כן מול המסך הכחול.',
+    level: 'LEVEL',
+    notesHeading: 'כתבתי',
+    notesIntro: 'מחשבות על ארכיטקטורה, AI ומה שביניהם. הפוסטים המלאים ב-LinkedIn.',
+    notesMore: 'לכל הפוסטים ב-LinkedIn',
+    notesLangHe: 'בעברית', notesLangEn: 'באנגלית',
     skillsLabel: 'תחומי התמחות',
     skills: ['Payload CMS', 'Headless CMS', 'JAMstack', 'ארכיטקטורת Front End', 'Developer Experience', 'אבטחה ותשתיות ענן'],
     ossHeading: 'קוד פתוח בשפינג',
@@ -174,8 +235,8 @@ export const t = {
     open: 'לפתוח את',
     code: 'קוד המקור של',
     codeLabel: 'קוד',
-    contactHeading: 'יצירת קשר',
-    contactBody: 'רוצים לדבר על ארכיטקטורה, על אחד הפרויקטים או על משחקים ישנים? אפשר לכתוב לי.',
+    contactHeading: 'יש לכם בעיה קשה?',
+    contactBody: 'ארכיטקטורה ארגונית, Payload ו-Headless CMS, חוויית מפתחים, או סתם משחק ישן שחסר לכם. כתבו לי.',
     otherLang: 'English', otherLangCode: 'en', otherPath: '/en/',
     footer: 'האתר נבנה בלי פריימוורק ובלי עוגיות.',
   },
@@ -196,6 +257,15 @@ export const t = {
       'I live in Jerusalem. Family man.',
     ],
     aboutHeading: 'About me',
+    nav: { about: 'About', career: 'Path', oss: 'Shefing', projects: 'Projects', games: 'Games', notes: 'Writing', contact: 'Contact' },
+    navLabel: 'Sections',
+    careerHeading: 'The path',
+    careerIntro: 'Thirty years of systems that serve millions, and ten more before that in front of the blue screen.',
+    level: 'LEVEL',
+    notesHeading: 'Writing',
+    notesIntro: 'Thoughts on architecture, AI and what’s in between. Full posts on LinkedIn.',
+    notesMore: 'All posts on LinkedIn',
+    notesLangHe: 'in Hebrew', notesLangEn: 'in English',
     skillsLabel: 'Areas of expertise',
     skills: ['Payload CMS', 'Headless CMS', 'JAMstack', 'Front-end architecture', 'Developer Experience', 'Security & cloud infrastructure'],
     ossHeading: 'Open source at Shefing',
@@ -207,8 +277,8 @@ export const t = {
     open: 'Open',
     code: 'Source code for',
     codeLabel: 'Code',
-    contactHeading: 'Contact',
-    contactBody: 'Want to talk architecture, one of these projects, or old games? Write to me.',
+    contactHeading: 'Got a hard problem?',
+    contactBody: 'Enterprise architecture, Payload and headless CMS, developer experience, or an old game you miss. Write to me.',
     otherLang: 'עברית', otherLangCode: 'he', otherPath: '/',
     footer: 'Built without a framework and without cookies.',
   },

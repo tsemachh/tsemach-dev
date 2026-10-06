@@ -5,7 +5,7 @@ import { t } from '../src/content.mjs';
 
 const pixelText = [
   'READY', 'RUN "TSEMACH"', 'tsemach.dev', 'SCORE 0123456789', 'ERROR- 404',
-  ...Object.values(t).flatMap(L => [L.name, L.aboutHeading, L.ossHeading, L.nowHeading, L.gamesHeading, L.contactHeading]),
+  ...Object.values(t).flatMap(L => [L.name, ...Object.entries(L).filter(([k]) => k.endsWith('Heading')).map(([, v]) => v), ...Object.values(L.nav)]), 'LEVEL 0123456789',
 ].join('') + ' ';
 const src = 'node_modules/.cache/rubik-pixels';
 const sets = [

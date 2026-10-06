@@ -2,7 +2,7 @@
 // אין תלויות — Node בלבד. הרצה: npm run build
 import { mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { site, projects, t, payloadPr } from '../src/content.mjs';
+import { site, projects, t, payloadPr, career, notes, notesUrl } from '../src/content.mjs';
 
 const OUT = 'dist';
 await rm(OUT, { recursive: true, force: true });
@@ -11,10 +11,11 @@ await cp('public', OUT, { recursive: true });
 await cp('src/site.css', `${OUT}/assets/site.css`);
 await cp('src/intro.js', `${OUT}/assets/intro.js`);
 await cp('src/game.js', `${OUT}/assets/game.js`);
+await cp('src/nav.js', `${OUT}/assets/nav.js`);
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const sha = s => `'sha256-${createHash('sha256').update(s).digest('base64')}'`;
-const ver = createHash('sha1').update(await readFile('src/site.css') + await readFile('src/intro.js') + await readFile('src/game.js')).digest('hex').slice(0, 8);
+const ver = createHash('sha1').update(await readFile('src/site.css') + await readFile('src/intro.js') + await readFile('src/game.js') + await readFile('src/nav.js')).digest('hex').slice(0, 8);
 
 // רץ ב-<head> לפני הציור הראשון: מחליט אם להציג את הפתיח (פעם אחת בכל ביקור, ולא כשמבקשים פחות תנועה)
 // ?play או לחיצה על READY מציגים את המשחק המלא גם כשהמערכת מבקשת פחות תנועה — זו פעולה יזומה של המשתמש
@@ -34,6 +35,7 @@ function project(p, L, i) {
         ${shot(p, L, false)}
         <div class="project__text">
           <h3><a class="project__link" href="${p.url}" aria-label="${esc(L.open)} ${esc(c.title)}">${esc(c.title)}</a></h3>
+          ${c.hook ? `<p class="project__hook">${esc(c.hook)}</p>` : ''}
           <p>${esc(c.body)}</p>
           <ul class="stack" aria-label="${L.lang === 'he' ? 'טכנולוגיות' : 'Built with'}">${p.stack.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
           ${p.repo ? `<a class="code" href="${p.repo}" aria-label="${esc(L.code)} ${esc(c.title)}"><svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M5.5 4 1.5 8l4 4 1-1-3-3 3-3-1-1Zm5 0-1 1 3 3-3 3 1 1 4-4-4-4Z"/></svg>${esc(L.codeLabel)}</a>` : ''}
@@ -94,6 +96,7 @@ function page(L) {
 <script type="speculationrules">${speculation}</script>
 <script type="application/ld+json">${ld}</script>
 <script src="/assets/intro.js?v=${ver}" defer></script>
+<script src="/assets/nav.js?v=${ver}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">${esc(L.skip)}</a>
@@ -121,7 +124,13 @@ function page(L) {
 </header>
 
 <main id="main" tabindex="-1">
-  <section class="about" aria-labelledby="about-h">
+  <nav class="sections" aria-label="${esc(L.navLabel)}">
+    <ol role="list">
+      ${Object.entries(L.nav).map(([id, label], i) => `<li><a href="#${id}"><span class="sections__n" aria-hidden="true">${i + 1}</span>${esc(label)}</a></li>`).join('\n      ')}
+    </ol>
+  </nav>
+
+  <section class="about" id="about" aria-labelledby="about-h">
     <h2 id="about-h">${esc(L.aboutHeading)}</h2>
     <div class="about__text">
       ${L.about.map(p => `<p>${p}</p>`).join('\n      ')}
@@ -129,7 +138,21 @@ function page(L) {
     </div>
   </section>
 
-  <section class="oss" aria-labelledby="oss-h">
+  <section class="career" id="career" aria-labelledby="career-h">
+    <div class="games__head">
+      <h2 id="career-h">${esc(L.careerHeading)}</h2>
+      <p>${esc(L.careerIntro)}</p>
+    </div>
+    <ol class="levels" role="list">
+      ${career.map(c => `<li class="level${c.level === career.length - 1 ? ' level--now' : ''}">
+        <p class="level__tag"><span class="level__n" lang="en" dir="ltr">${L.level} ${c.level}</span><span class="level__years">${esc(c.years[L.lang])}</span></p>
+        <h3>${esc(c[L.lang].title)}</h3>
+        <p>${esc(c[L.lang].body)}</p>
+      </li>`).join('\n      ')}
+    </ol>
+  </section>
+
+  <section class="oss" id="oss" aria-labelledby="oss-h">
     <div class="games__head">
       <h2 id="oss-h">${esc(L.ossHeading)}</h2>
       <p>${esc(L.ossIntro)}</p>
@@ -140,14 +163,14 @@ function page(L) {
     <p class="upstream">${L.ossUpstream.replace('{pr}', payloadPr)}</p>
   </section>
 
-  <section class="work" aria-labelledby="now-h">
+  <section class="work" id="projects" aria-labelledby="now-h">
     <h2 id="now-h">${esc(L.nowHeading)}</h2>
     <ul class="projects" role="list">
       ${now.map((p, i) => project(p, L, i)).join('\n      ')}
     </ul>
   </section>
 
-  <section class="games" aria-labelledby="games-h">
+  <section class="games" id="games" aria-labelledby="games-h">
     <div class="games__head">
       <h2 id="games-h">${esc(L.gamesHeading)}</h2>
       <p>${esc(L.gamesIntro)}</p>
@@ -157,7 +180,22 @@ function page(L) {
     </ul>
   </section>
 
-  <section class="contact" aria-labelledby="contact-h">
+  <section class="notes" id="notes" aria-labelledby="notes-h">
+    <div class="games__head">
+      <h2 id="notes-h">${esc(L.notesHeading)}</h2>
+      <p>${esc(L.notesIntro)}</p>
+    </div>
+    <ul class="notes__list" role="list">
+      ${notes.map(n => `<li class="note">
+        <p class="note__meta"><time datetime="${n.date}">${new Intl.DateTimeFormat(L.lang === 'he' ? 'he-IL' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(n.date))}</time><span>${esc(n.lang === 'he' ? L.notesLangHe : L.notesLangEn)}</span></p>
+        <h3><a href="${notesUrl}">${esc(n[L.lang].title)}</a></h3>
+        <p>${esc(n[L.lang].body)}</p>
+      </li>`).join('\n      ')}
+    </ul>
+    <p class="notes__more"><a href="${notesUrl}">${esc(L.notesMore)}</a></p>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
     <h2 id="contact-h">${esc(L.contactHeading)}</h2>
     <p>${esc(L.contactBody)}</p>
     <p class="contact__mail"><a href="mailto:${site.email}">${site.email}</a></p>
