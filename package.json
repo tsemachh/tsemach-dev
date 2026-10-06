@@ -11,10 +11,12 @@
     "fonts": "node tools/fonts.mjs",
     "serve": "node tools/serve.mjs",
     "deploy": "npm run build && set -a && . ./.env && set +a && npx --yes wrangler@4 pages deploy dist --project-name tsemach-dev --branch main",
-    "deploy:preview": "npm run build && set -a && . ./.env && set +a && npx --yes wrangler@4 pages deploy dist --project-name tsemach-dev --branch preview"
+    "deploy:preview": "npm run build && set -a && . ./.env && set +a && npx --yes wrangler@4 pages deploy dist --project-name tsemach-dev --branch preview",
+    "clips": "node tools/clips.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.14.0",
+    "ffmpeg-static": "^5.3.0",
     "playwright": "^1.63.0",
     "sharp": "^0.33.5"
   }

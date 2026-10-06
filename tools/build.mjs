@@ -24,9 +24,15 @@ const headScript = `try{var d=document.documentElement,f=/[?&]play\\b/.test(loca
 const speculation = JSON.stringify({ prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }] });
 
 function shot(p, L, eager) {
-  return `<picture class="shot">
-          <img src="/shots/${p.shot}-480.webp" srcset="/shots/${p.shot}-480.webp 480w, /shots/${p.shot}-960.webp 960w" sizes="(min-width: 60rem) 26rem, 92vw" width="480" height="360" alt="" ${eager ? '' : 'loading="lazy"'} decoding="async">
-        </picture>`;
+  // clip: קטע משחק של 4 שניות (tools/clips.mjs) שמתנגן פעם אחת כשהכרטיס נכנס למסך — ראה src/nav.js
+  const clip = p.clip ? `
+          <video class="clip" muted playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture>
+            <source src="/clips/${p.id}.webm" type='video/webm; codecs="vp9"'>
+            <source src="/clips/${p.id}.mp4" type="video/mp4">
+          </video>` : '';
+  return `<div class="shot${p.clip ? ' shot--clip' : ''}">
+          <img src="/shots/${p.shot}-480.webp" srcset="/shots/${p.shot}-480.webp 480w, /shots/${p.shot}-960.webp 960w" sizes="(min-width: 60rem) 26rem, 92vw" width="480" height="360" alt="" ${eager ? '' : 'loading="lazy"'} decoding="async">${clip}
+        </div>`;
 }
 
 function project(p, L, i) {
@@ -260,6 +266,9 @@ await writeFile(`${OUT}/_headers`, `/*
   Cache-Control: public, max-age=31536000, immutable
 
 /shots/*
+  Cache-Control: public, max-age=604800
+
+/clips/*
   Cache-Control: public, max-age=604800
 `);
 

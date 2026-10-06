@@ -32,3 +32,29 @@
     if (el) io.observe(el);
   }
 })();
+
+// קטעי משחק: מתנגנים פעם אחת (4 שניות) כשהכרטיס נכנס למסך, ושוב במעבר עכבר או במיקוד.
+// לא מתנגנים כשמבקשים פחות תנועה או חיסכון בנתונים — אז נשארת התמונה.
+(() => {
+  const clips = document.querySelectorAll('.shot--clip');
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData;
+  if (!clips.length || calm || !('IntersectionObserver' in window)) return;
+  const play = shot => {
+    const v = shot.querySelector('video');
+    if (!v || shot.classList.contains('is-playing')) return;
+    if (v.preload === 'none') { v.preload = 'auto'; v.load(); }
+    v.currentTime = 0;
+    v.play().then(() => shot.classList.add('is-playing')).catch(() => {});
+  };
+  for (const shot of clips) {
+    const v = shot.querySelector('video');
+    v.addEventListener('ended', () => { shot.classList.remove('is-playing'); shot.classList.add('has-played'); });
+    const card = shot.closest('.project');
+    card?.addEventListener('pointerenter', () => play(shot));
+    card?.addEventListener('focusin', () => play(shot));
+  }
+  const io = new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) { play(e.target); io.unobserve(e.target); }
+  }, { threshold: 0.6 });
+  clips.forEach(c => io.observe(c));
+})();

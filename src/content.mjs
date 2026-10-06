@@ -106,6 +106,7 @@ export const projects = [
     url: 'https://tsemachh.github.io/river-raid/',
     repo: 'https://github.com/tsemachh/river-raid',
     shot: 'river',
+    clip: { start: 2.2 },
     shotPlay: [/start game/i, /got it/i], // צילום מתוך המשחק, לא ממסך הפתיחה
     stack: ['Canvas', 'Vanilla JS', 'PWA'],
     he: {
@@ -144,6 +145,7 @@ export const projects = [
     url: 'https://tsemachh.github.io/arcade-tag/',
     repo: 'https://github.com/tsemachh/arcade-tag',
     shot: 'tag',
+    clip: { gif: 'https://raw.githubusercontent.com/tsemachh/arcade-tag/main/gameplay.gif', start: 1.5 },
     shotSrc: 'https://raw.githubusercontent.com/tsemachh/arcade-tag/main/gameplay-preview.png', // המשחק פותח חלון עזרה, אז לוקחים את התמונה מה-repo
     stack: ['WebRTC', 'Web Audio', 'PWA'],
     he: {
@@ -210,9 +212,10 @@ export const t = {
     ogDescription: 'ארכיטקט ראשי בשפינג, מתמחה ב-Payload CMS, בארכיטקטורת Front End ובחוויית מפתחים. ארבעים שנה של קוד, מה-800XL ועד סוכני AI.',
     tagline: 'ארבעים שנה של קוד, מ-800XL ועד סוכני AI.',
     about: [
-      'אני הארכיטקט הראשי של <a href="https://shefing.com">שפינג</a>, ומתכנת מאז שהמסך הכחול של ה-800XL אמר READY.',
-      'אני מתמחה במערכות Headless CMS, ובעיקר ב-Payload CMS, בארכיטקטורת Front End ו-JAMstack ובחוויית המפתחים, לצד אבטחה ותשתיות ענן. בשעות הפנאי אני בונה מחדש משחקים שגדלתי עליהם, וכלים קטנים לקהילה ולבית המדרש.',
-      'גר בירושלים. איש משפחה למופת, אבא מושלם :-)',
+      'אני קם כל בוקר כדי לעשות טוב בעולם. טכנולוגיה ובנייה של דברים הן התשוקה שלי, ואני מכור לגרום לדברים לקרות, באיכות שאני דורש.',
+      'אני הארכיטקט הראשי של <a href="https://shefing.com">שפינג</a>, ומתכנת מאז שהמסך הכחול של ה-800XL אמר READY. אני מתמחה במערכות Headless CMS, ובעיקר ב-Payload CMS, בארכיטקטורת Front End ו-JAMstack ובחוויית המפתחים, לצד אבטחה ותשתיות ענן.',
+      'בשעות הפנאי אני בונה מחדש משחקים שגדלתי עליהם, וכלים קטנים לקהילה ולבית המדרש.',
+      'נולדתי בתוניסיה וגר בירושלים. איש משפחה למופת, אבא מושלם :-)',
     ],
     aboutHeading: 'קצת עליי',
     nav: { about: 'עליי', career: 'מסלול', oss: 'שפינג', projects: 'פרויקטים', games: 'משחקים', notes: 'כתבתי', contact: 'קשר' },
@@ -252,9 +255,10 @@ export const t = {
     ogDescription: 'Chief Architect at Shefing, specializing in Payload CMS, front-end architecture and developer experience. Forty years of code, from the 800XL to AI agents.',
     tagline: 'Forty years of code, from the 800XL to AI agents.',
     about: [
-      'I’m the Chief Architect at <a href="https://shefing.com">Shefing</a>, and I’ve been programming since the 800XL’s blue screen first said READY.',
-      'I specialize in headless CMS, especially Payload CMS, front-end and JAMstack architecture, and developer experience, along with security and cloud infrastructure. In my spare time I rebuild the games I grew up with, and small tools for my community and for Torah study.',
-      'I live in Jerusalem. Family man.',
+      'I wake up every morning to do some good in the world. I’m passionate about technology and building things, and addicted to making them happen, at the quality I demand.',
+      'I’m the Chief Architect at <a href="https://shefing.com">Shefing</a>, and I’ve been programming since the 800XL’s blue screen first said READY. I specialize in headless CMS, especially Payload CMS, front-end and JAMstack architecture, and developer experience, along with security and cloud infrastructure.',
+      'In my spare time I rebuild the games I grew up with, and small tools for my community and for Torah study.',
+      'Born in Tunisia, living in Jerusalem. Family man.',
     ],
     aboutHeading: 'About me',
     nav: { about: 'About', career: 'Path', oss: 'Shefing', projects: 'Projects', games: 'Games', notes: 'Writing', contact: 'Contact' },

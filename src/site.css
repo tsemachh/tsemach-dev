@@ -269,10 +269,18 @@ h2 {
 
 /* כל צילום מסך יושב בתוך "מסך" כחול, כמו בצג של פעם */
 .shot {
-  display: block; padding: clamp(6px, 1.2vw, 10px); border-radius: 16px;
+  --pad: clamp(6px, 1.2vw, 10px);
+  position: relative;
+  display: block; padding: var(--pad); border-radius: 16px;
   background: linear-gradient(160deg, var(--screen), var(--screen-deep));
   box-shadow: 0 1px 0 rgb(255 255 255 / .12) inset, 0 22px 44px -26px rgb(0 0 0 / .75);
 }
+/* קטע משחק מעל התמונה; מופיע רק כשהוא מתנגן */
+.clip {
+  position: absolute; inset: var(--pad); width: calc(100% - 2 * var(--pad)); height: calc(100% - 2 * var(--pad));
+  object-fit: cover; border-radius: 8px; opacity: 0; transition: opacity 250ms; pointer-events: none; background: #000;
+}
+.shot.is-playing .clip, .shot.has-played .clip { opacity: 1; }
 .shot img {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: top;
   border-radius: 8px; background: var(--surface);
