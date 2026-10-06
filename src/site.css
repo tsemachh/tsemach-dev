@@ -170,7 +170,7 @@ main:focus { outline: none; }
 .intro.run .boot { opacity: 0; transition: opacity 250ms; }
 .intro.reveal .skip-intro { opacity: 0; transition: opacity 250ms; }
 
-/* משחק הירי (src/game.js) */
+/* משחק הירי (src/game.js). השחקן שולט — הפתיח נמשך כל עוד הוא משחק */
 .game { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; touch-action: none; cursor: crosshair; transition: opacity 300ms; }
 .game--out { opacity: 0; pointer-events: none; }
 .skip-intro { z-index: 3; }

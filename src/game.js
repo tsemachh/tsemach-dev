@@ -112,7 +112,7 @@ export function run({ hero, nameEl, scoreFont = '"Rubik Pixels", monospace' }) {
   const ship = { x: W / 2, y: H - Math.max(56, H * 0.1), w: shipArt.width, h: shipArt.height };
   const bullets = [], sparks = [], bits = [], pops = [];
   let score = 0, cool = 0, t = 0, last = performance.now(), raf = 0, nextDive = 0.9, manualUntil = 0, keyDir = 0;
-  let allDead = false, deadAt = 0, resolved = false;
+  let allDead = false, deadAt = 0, resolved = false, played = false, lastInput = -99;
   let resolveDone;
   const done = new Promise(r => { resolveDone = r; });
 
@@ -177,7 +177,8 @@ export function run({ hero, nameEl, scoreFont = '"Rubik Pixels", monospace' }) {
     if (t > nextDive && !allDead) { startDive(); nextDive = t + (t > 1.6 ? 0.22 : 0.38); }
 
     // אחרי הזמן הקצוב — כל מי שנשאר מתפוצץ בשרשרת, כדי שהפתיח יישאר קצר
-    if (t > 2.8 && !allDead) {
+    const idle = !played || t - lastInput > 4;
+    if (t > 2.8 && !allDead && idle) {
       const left = aliens.filter(a => a.alive);
       if (left.length && (!update.chain || t - update.chain > 0.045)) { update.chain = t; explode(left[(Math.random() * left.length) | 0]); }
     }
@@ -250,6 +251,13 @@ export function run({ hero, nameEl, scoreFont = '"Rubik Pixels", monospace' }) {
     ctx.fillText('SCORE ' + String(score).padStart(6, '0'), W / 2, Math.max(18, H * 0.04));
     ctx.fillStyle = '#ffe08a';
     for (const p of pops) ctx.fillText(p.s, p.x, p.y);
+    if (!played && !allDead) {
+      ctx.globalAlpha = 0.55 + 0.35 * Math.sin(t * 5);
+      ctx.font = `500 ${Math.max(12, cell * 3)}px Rubik, system-ui, sans-serif`;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(document.documentElement.lang === 'he' ? 'גררו או לחצו ← → כדי לשחק' : 'Drag or press ← → to play', W / 2, ship.y + ship.h + cell * 3);
+      ctx.globalAlpha = 1;
+    }
   }
 
   function frame(now) {
@@ -262,9 +270,9 @@ export function run({ hero, nameEl, scoreFont = '"Rubik Pixels", monospace' }) {
   raf = requestAnimationFrame(frame);
 
   // שליטה: נגיעה/גרירה/עכבר מזיזים את הספינה, חיצים לצדדים
-  const steer = e => { manualUntil = t + 0.8; ship.x = e.clientX - box.left; };
+  const steer = e => { played = true; lastInput = t; manualUntil = t + 2.5; ship.x = e.clientX - box.left; };
   const onKey = e => {
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { manualUntil = t + 0.8; keyDir = e.type === 'keydown' ? (e.key === 'ArrowLeft' ? -1 : 1) : 0; e.preventDefault(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { played = true; lastInput = t; manualUntil = t + 2.5; keyDir = e.type === 'keydown' ? (e.key === 'ArrowLeft' ? -1 : 1) : 0; e.preventDefault(); }
   };
   canvas.addEventListener('pointerdown', steer);
   canvas.addEventListener('pointermove', e => { if (e.buttons || e.pointerType !== 'mouse') steer(e); });

@@ -18,7 +18,7 @@ const ver = createHash('sha1').update(await readFile('src/site.css') + await rea
 
 // רץ ב-<head> לפני הציור הראשון: מחליט אם להציג את הפתיח (פעם אחת בכל ביקור, ולא כשמבקשים פחות תנועה)
 // ?play או לחיצה על READY מציגים את המשחק המלא גם כשהמערכת מבקשת פחות תנועה — זו פעולה יזומה של המשתמש
-const headScript = `try{var d=document.documentElement,f=/[?&]play\\b/.test(location.search)||sessionStorage.getItem('force-play');sessionStorage.removeItem('force-play');if(f||(!sessionStorage.getItem('seen-intro-'+d.lang)&&!location.hash)){d.classList.add('intro');if(!f&&matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('calm');setTimeout(function(){d.classList.remove('intro','calm','run','reveal','sweep','done')},15000)}}catch(e){}`;
+const headScript = `try{var d=document.documentElement,f=/[?&]play\\b/.test(location.search)||sessionStorage.getItem('force-play');sessionStorage.removeItem('force-play');if(f||(!sessionStorage.getItem('seen-intro-'+d.lang)&&!location.hash)){d.classList.add('intro');if(!f&&matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('calm');setTimeout(function(){d.classList.remove('intro','calm','run','reveal','sweep','done')},120000)}}catch(e){}`;
 
 const speculation = JSON.stringify({ prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }] });
 
