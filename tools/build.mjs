@@ -2,7 +2,7 @@
 // אין תלויות — Node בלבד. הרצה: npm run build
 import { mkdir, writeFile, readFile, cp, rm } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { site, projects, t, payloadPr, career, notes, notesUrl } from '../src/content.mjs';
+import { site, projects, t, payloadPr, career, notes, notesUrl, tvPlaylist } from '../src/content.mjs';
 
 const OUT = 'dist';
 await rm(OUT, { recursive: true, force: true });
@@ -12,10 +12,11 @@ await cp('src/site.css', `${OUT}/assets/site.css`);
 await cp('src/intro.js', `${OUT}/assets/intro.js`);
 await cp('src/game.js', `${OUT}/assets/game.js`);
 await cp('src/nav.js', `${OUT}/assets/nav.js`);
+await cp('src/tv.js', `${OUT}/assets/tv.js`);
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const sha = s => `'sha256-${createHash('sha256').update(s).digest('base64')}'`;
-const ver = createHash('sha1').update(await readFile('src/site.css') + await readFile('src/intro.js') + await readFile('src/game.js') + await readFile('src/nav.js')).digest('hex').slice(0, 8);
+const ver = createHash('sha1').update(await readFile('src/site.css') + await readFile('src/intro.js') + await readFile('src/game.js') + await readFile('src/nav.js') + await readFile('src/tv.js')).digest('hex').slice(0, 8);
 
 // רץ ב-<head> לפני הציור הראשון: מחליט אם להציג את הפתיח (פעם אחת בכל ביקור, ולא כשמבקשים פחות תנועה)
 // ?play או לחיצה על READY מציגים את המשחק המלא גם כשהמערכת מבקשת פחות תנועה — זו פעולה יזומה של המשתמש
@@ -27,8 +28,8 @@ function shot(p, L, eager) {
   // clip: קטע משחק של 4 שניות (tools/clips.mjs) שמתנגן פעם אחת כשהכרטיס נכנס למסך — ראה src/nav.js
   const clip = p.clip ? `
           <video class="clip" muted playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture>
+            <source src="/clips/${p.id}.mp4" type='video/mp4; codecs="avc1.42E01E"'>
             <source src="/clips/${p.id}.webm" type='video/webm; codecs="vp9"'>
-            <source src="/clips/${p.id}.mp4" type="video/mp4">
           </video>` : '';
   return `<div class="shot${p.clip ? ' shot--clip' : ''}">
           <img src="/shots/${p.shot}-480.webp" srcset="/shots/${p.shot}-480.webp 480w, /shots/${p.shot}-960.webp 960w" sizes="(min-width: 60rem) 26rem, 92vw" width="480" height="360" alt="" ${eager ? '' : 'loading="lazy"'} decoding="async">${clip}
@@ -47,6 +48,28 @@ function project(p, L, i) {
           ${p.repo ? `<a class="code" href="${p.repo}" aria-label="${esc(L.code)} ${esc(c.title)}"><svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M5.5 4 1.5 8l4 4 1-1-3-3 3-3-1-1Zm5 0-1 1 3 3-3 3 1 1 4-4-4-4Z"/></svg>${esc(L.codeLabel)}</a>` : ''}
         </div>
       </li>`;
+}
+
+// טלוויזיה של 8 ביט במסך הפתיחה: מחליפה משחקים ופרויקטים (src/tv.js). התמונה הראשונה בלי JS.
+function tv(L) {
+  const items = tvPlaylist.map(id => projects.find(p => p.id === id)).filter(Boolean).map(p => ({
+    title: p[L.lang].title, url: p.url, shot: `/shots/${p.shot}-960.webp`,
+    clip: p.clip ? { webm: `/clips/${p.id}.webm`, mp4: `/clips/${p.id}.mp4` } : null,
+  }));
+  const first = items[0];
+  return `<figure class="tv" data-items="${esc(JSON.stringify(items))}">
+    <div class="tv__screen" aria-hidden="true">
+      <img class="tv__img" src="${first.shot}" alt="" width="960" height="720" decoding="async" fetchpriority="low">
+      <video class="tv__video" muted playsinline preload="none" tabindex="-1" disablepictureinpicture></video>
+    </div>
+    <figcaption class="tv__bar">
+      <span class="tv__label">${esc(L.nowPlaying)}: <a class="tv__link" href="${first.url}">${esc(first.title)}</a></span>
+      <button class="tv__toggle" type="button" aria-pressed="false" data-pause="${esc(L.tvPause)}" data-play="${esc(L.tvPlay)}" aria-label="${esc(L.tvPause)}" hidden>
+        <svg class="tv__icon-pause" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M4 2h3v12H4zM9 2h3v12H9z"/></svg>
+        <svg class="tv__icon-play" aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M4 2l10 6-10 6z"/></svg>
+      </button>
+    </figcaption>
+  </figure>`;
 }
 
 function page(L) {
@@ -103,6 +126,7 @@ function page(L) {
 <script type="application/ld+json">${ld}</script>
 <script src="/assets/intro.js?v=${ver}" defer></script>
 <script src="/assets/nav.js?v=${ver}" defer></script>
+<script src="/assets/tv.js?v=${ver}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">${esc(L.skip)}</a>
@@ -118,6 +142,7 @@ function page(L) {
     <p class="boot__line boot__cmd"><span class="boot__typed" data-text='RUN "TSEMACH"'></span><span class="cursor"></span></p>
   </div>
 
+  ${tv(L)}
   <div class="hero__body">
     <button class="ready" type="button" aria-label="READY – ${L.lang === 'he' ? 'להציג שוב את הפתיח' : 'replay the intro'}">READY<span class="cursor" aria-hidden="true"></span></button>
     <h1 class="name">

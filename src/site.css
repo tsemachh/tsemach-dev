@@ -159,6 +159,43 @@ main:focus { outline: none; }
 
 .boot, .skip-intro { display: none; }
 
+/* ───────── הטלוויזיה במסך הפתיחה ───────── */
+.tv { margin: clamp(.5rem, 2vh, 1.5rem) 0 0; align-self: start; justify-self: center; width: min(100%, 26rem); }
+.tv__screen {
+  position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 12px; background: #000;
+  box-shadow: 0 0 0 10px #0d2350, 0 0 0 12px rgb(180 207 255 / .28), 0 0 70px 10px rgb(150 190 255 / .18), 0 34px 60px -24px rgb(0 0 0 / .85);
+}
+.tv__screen img, .tv__screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; transition: opacity 280ms ease; }
+.tv__video { opacity: 0; }
+.tv.is-video .tv__video { opacity: 1; }
+.tv.is-switching .tv__img, .tv.is-switching .tv__video { opacity: 0; }
+/* קווי סריקה וזכוכית מעוגלת */
+.tv__screen::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgb(0 0 0 / .22) 0 1px, transparent 1px 3px),
+    radial-gradient(120% 100% at 50% 40%, transparent 60%, rgb(0 0 0 / .45));
+}
+.tv__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.1rem; font-size: var(--step--1); color: var(--phosphor); }
+.tv__link { color: #fff; font-weight: 600; }
+.tv__toggle {
+  display: grid; place-items: center; width: 44px; height: 44px; flex: none; border-radius: 6px; cursor: pointer;
+  background: transparent; color: var(--phosphor); border: 1px solid rgb(180 207 255 / .45);
+}
+.tv__toggle:hover { color: #fff; }
+.tv__toggle .tv__icon-play, .tv__toggle[aria-pressed="true"] .tv__icon-pause { display: none; }
+.tv__toggle[aria-pressed="true"] .tv__icon-play { display: block; }
+@media (prefers-contrast: more) { .tv__screen::after { display: none; } }
+
+/* במחשב: הטלוויזיה בצד אחד והשם בצד השני */
+@media (min-width: 70rem) {
+  .tv { position: absolute; inset-inline-end: var(--gutter); top: 50%; translate: 0 -46%; width: min(36vw, 34rem); margin: 0; }
+  .name, .name:lang(he) { font-size: clamp(4rem, 10.5vw, 12rem); }
+  .hero__body { max-width: calc(100% - min(36vw, 34rem) - 3 * var(--gutter)); }
+}
+.intro .tv { opacity: 0; visibility: hidden; }
+.tv { transition: opacity 600ms; }
+
 /* ───────── הפתיח (רק כשמותר להזיז, ופעם אחת בביקור) ───────── */
 .intro .hero {
   clip-path: inset(14svh 8vw 14svh round 28px);

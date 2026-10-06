@@ -198,6 +198,9 @@ export const notes = [
 ];
 export const notesUrl = 'https://www.linkedin.com/in/tsemach-hadad/recent-activity/all/';
 
+// הטלוויזיה במסך הפתיחה: מה מתחלף עליה, לפי הסדר
+export const tvPlaylist = ['river', 'tag', 'atari', 'xonix', 'daf', 'luach'];
+
 export const payloadPr = 'https://github.com/payloadcms/payload/pull/10807';
 
 export const t = {
@@ -235,6 +238,7 @@ export const t = {
     ossUpstream: 'אני תורם גם לליבה של Payload: <a href="{pr}">הצגת השדות שהשתנו בלבד בהשוואת גרסאות</a> נכנסה לגרסה הרשמית.',
     nowHeading: 'פרויקטים אישיים',
     gamesHeading: 'משחקים',
+    nowPlaying: 'עכשיו על המסך', tvPause: 'עצירת ההחלפה', tvPlay: 'הפעלת ההחלפה',
     prev: 'המשחק הקודם', next: 'המשחק הבא',
     gamesIntro: 'גרסאות חדשות למשחקים מימי ה-8 ביט. כולם רצים בדפדפן, בלי התקנה.',
     open: 'לפתוח את',
@@ -280,6 +284,7 @@ export const t = {
     ossUpstream: 'I also contribute to Payload core: <a href="{pr}">showing only the modified fields in the version diff</a> was merged upstream.',
     nowHeading: 'Personal projects',
     gamesHeading: 'Games',
+    nowPlaying: 'Now on screen', tvPause: 'Pause the rotation', tvPlay: 'Play the rotation',
     prev: 'Previous game', next: 'Next game',
     gamesIntro: 'New takes on games from the 8-bit days. They all run in the browser, nothing to install.',
     open: 'Open',
