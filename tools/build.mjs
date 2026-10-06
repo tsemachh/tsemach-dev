@@ -76,14 +76,14 @@ function page(L) {
 <meta name="theme-color" content="#1d4596">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="tsemach.dev">
-<meta property="og:title" content="${esc(L.title)}">
-<meta property="og:description" content="${esc(L.description)}">
+<meta property="og:title" content="${esc(L.ogTitle)}">
+<meta property="og:description" content="${esc(L.ogDescription)}">
 <meta property="og:url" content="${url}">
 <meta property="og:locale" content="${L.lang === 'he' ? 'he_IL' : 'en_US'}">
 <meta property="og:image" content="${site.origin}/og-${L.lang}.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${esc(L.name)} – ${esc(L.tagline)}">
+<meta property="og:image:alt" content="${esc(L.name)}: ${L.lang === 'he' ? 'השם נבנה מפיקסלים של חייזרים מתפוצצים במשחק ירי בסגנון 8 ביט' : 'the name assembled from the pixels of exploding aliens in an 8-bit shooter'}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node tools/build.mjs",
     "shots": "node tools/shots.mjs",
-    "og": "node tools/og.mjs",
+    "og": "node tools/build.mjs && node tools/og.mjs && node tools/build.mjs",
     "check": "node tools/check.mjs",
     "dev": "npm run build && npm run serve",
     "fonts": "node tools/fonts.mjs",

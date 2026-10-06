@@ -153,6 +153,8 @@ export const t = {
     skip: 'דילוג לתוכן',
     skipIntro: 'דילוג על הפתיח',
     name: 'צמח חדד',
+    ogTitle: 'צמח חדד',
+    ogDescription: 'ארכיטקט ראשי בשפינג. Payload CMS, ארכיטקטורת Front End וחוויית מפתחים.',
     tagline: 'ארבעים שנה של קוד, מ-800XL ועד סוכני AI.',
     about: [
       'אני הארכיטקט הראשי של <a href="https://shefing.com">שפינג</a>, ומתכנת מאז שהמסך הכחול של ה-800XL אמר READY.',
@@ -183,6 +185,8 @@ export const t = {
     skip: 'Skip to content',
     skipIntro: 'Skip intro',
     name: 'Tsemach Hadad',
+    ogTitle: 'Tsemach Hadad',
+    ogDescription: 'Chief Architect at Shefing. Payload CMS, front-end architecture and developer experience.',
     tagline: 'Forty years of code, from the 800XL to AI agents.',
     about: [
       'I’m the Chief Architect at <a href="https://shefing.com">Shefing</a>, and I’ve been programming since the 800XL’s blue screen first said READY.',

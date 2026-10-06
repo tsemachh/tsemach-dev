@@ -2,13 +2,13 @@
 // שעפים למקומם בשם — כשהאחרון נופל, השם שלם. טייס אוטומטי משחק לבד; נגיעה, גרירה או חיצים לוקחים שליטה.
 // run() מחזיר { done, stop }: done מתממש כשהשם הורכב.
 
-const SPRITES = {
+export const SPRITES = {
   boss: ['....x....', '...xxx...', 'x.xxoxx.x', 'xxxxxxxxx', 'x.xxxxx.x', 'x..x.x..x'],
   bug1: ['..x..x..', '...xx...', '.xxxxxx.', 'xxoxxoxx', 'xxxxxxxx', 'x.x..x.x', '.x....x.'],
   bug2: ['..x..x..', 'x..xx..x', 'x.xxxx.x', 'xxoxxoxx', 'xxxxxxxx', '..x..x..', '.x....x.'],
   ship: ['....x....', '....x....', '...xxx...', '..xxoxx..', '.xxxxxxx.', 'xxx.x.xxx', 'xx.....xx'],
 };
-const ROWS = [
+export const ROWS = [
   { kind: 'boss', a: '#ffb547', b: '#ffffff', score: 150 },
   { kind: 'bug', a: '#ff7a8a', b: '#ffe08a', score: 80 },
   { kind: 'bug', a: '#b4cfff', b: '#1d4596', score: 50 },
@@ -18,7 +18,7 @@ const ROWS = [
 const ease = t => 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3);
 const rand = (a, b) => a + Math.random() * (b - a);
 
-function bake(rows, a, b, cell) {
+export function bake(rows, a, b, cell) {
   const c = document.createElement('canvas');
   c.width = rows[0].length * cell; c.height = rows.length * cell;
   const g = c.getContext('2d');
@@ -251,7 +251,7 @@ export function run({ hero, nameEl, scoreFont = '"Rubik Pixels", monospace' }) {
     ctx.fillText('SCORE ' + String(score).padStart(6, '0'), W / 2, Math.max(18, H * 0.04));
     ctx.fillStyle = '#ffe08a';
     for (const p of pops) ctx.fillText(p.s, p.x, p.y);
-    if (!played && !allDead) {
+    if (!played && !allDead && !/[?&]og\b/.test(location.search)) {
       ctx.globalAlpha = 0.55 + 0.35 * Math.sin(t * 5);
       ctx.font = `500 ${Math.max(12, cell * 3)}px Rubik, system-ui, sans-serif`;
       ctx.fillStyle = '#ffffff';
