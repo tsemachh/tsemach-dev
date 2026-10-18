@@ -21,6 +21,17 @@ function encode(input, out, { start = 0, crop = '' } = {}) {
 
 // כל משחק: איך מגיעים למשחק עצמו, ומה "השחקן" עושה בזמן ההקלטה
 const scripts = {
+  async shoot(page) {
+    // ישר לעולם של Galaxian (?scene=swarm), יורים ונעים ימינה ושמאלה
+    await page.goto('https://shoot.tsemach.dev/?scene=swarm', { waitUntil: 'load' });
+    await page.waitForTimeout(2600);
+    await page.keyboard.down('Space');
+    for (let i = 0; i < 8; i++) {
+      const k = i % 2 ? 'ArrowLeft' : 'ArrowRight';
+      await page.keyboard.down(k); await page.waitForTimeout(600); await page.keyboard.up(k);
+    }
+    await page.keyboard.up('Space');
+  },
   async river(page) {
     await page.getByRole('button', { name: /start game/i }).click();
     await page.getByText(/got it/i).first().click().catch(() => {});

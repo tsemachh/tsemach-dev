@@ -84,6 +84,25 @@ export const projects = [
     },
   },
   {
+    id: 'shoot',
+    group: 'games',
+    url: 'https://shoot.tsemach.dev/',
+    repo: 'https://github.com/tsemachh/shoot-dont-talk',
+    shot: 'shoot',
+    clip: {}, // נגזר מהסקריפט: 4 השניות האחרונות של ההקלטה
+    stack: ['Phaser', 'TypeScript', 'PWA'],
+    he: {
+      hook: 'חמישה משחקי יריות קלאסיים, ריצה אחת. החללית קופצת בהיפר-חלל מעולם לעולם ומשנה צורה.',
+      title: 'Shoot, Don’t Talk',
+      body: 'מסע דרך Space Invaders, Galaxian, Moon Patrol, Gyruss ו-River Raid במשחק אחד. פיקסל-ארט, מוזיקת צ׳יפטיון וטבלת שיאים עולמית, עם בדיקות דפדפן אוטומטיות אחרי כל שינוי.',
+    },
+    en: {
+      hook: 'Five classic arcade shooters, one run. One ship jumps through hyperspace between worlds and morphs to fit each one.',
+      title: 'Shoot, Don’t Talk',
+      body: 'A run through Space Invaders, Galaxian, Moon Patrol, Gyruss and River Raid in a single game. Pixel art, chiptune music and a global high-score table, checked by automated browser tests after every change.',
+    },
+  },
+  {
     id: 'atari',
     group: 'games',
     url: 'https://games.tsemach.dev/atari-arcade/',
@@ -201,7 +220,7 @@ export const notes = [
 export const notesUrl = 'https://www.linkedin.com/in/tsemach-hadad/recent-activity/all/';
 
 // הטלוויזיה במסך הפתיחה: מה מתחלף עליה, לפי הסדר
-export const tvPlaylist = ['river', 'tag', 'atari', 'xonix', 'daf', 'luach'];
+export const tvPlaylist = ['shoot', 'river', 'tag', 'atari', 'xonix', 'daf', 'luach'];
 
 export const payloadPr = 'https://github.com/payloadcms/payload/pull/10807';
 
