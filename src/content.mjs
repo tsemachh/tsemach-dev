@@ -204,6 +204,9 @@ export const career = [
 
 // מה שכתבתי ב-LinkedIn
 export const notes = [
+  { date: '2026-11-03', lang: 'en',
+    he: { title: 'הפייפליין הוא משפך, לא חומה', body: 'CI הוא המקום שבו המהירות מתה, כי הוא גדל בהצטברות ולא בתכנון. שבעה עקרונות לחוויית מפתח: בדיקות זולות מוקדם, חסימה רק על סיכון חדש, וכל שלב עונה על שאלה אחת.' },
+    en: { title: 'The pipeline is a funnel, not a wall', body: 'CI is where velocity goes to die, because it grows by accretion instead of design. Seven principles for developer experience: cheap checks early, block only on new risk, and each stage answers one question.' } },
   { date: '2026-10-04', lang: 'he',
     he: { title: 'קלוד מול שפה בת 1700 שנה', body: 'איך בניתי עם Opus 5.5 דפי חזרה לדף היומי: הגדרת מוצר, ארכיטקטורה וסוכנים שבודקים את מה שאני פחות מבין.' },
     en: { title: 'Claude vs. a 1,700-year-old language', body: 'Building Daf Yomi review pages with Opus 5.5: product definition, architecture, and agents that check what I understand less.' } },
